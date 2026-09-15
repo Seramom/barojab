@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OJOb — 알바 탐색</title>
+<style>
+:root{--p:#7A3BFF;--p2:#5820CC;--lilac:#D8B4FC;--misty:#F4ECFF;--charcoal:#1E1B2E;--cloud:#F7F7FA;--txt:#1E1B2E;--txt-sub:#3A3060;--muted:#8878B8;--border:rgba(122,59,255,0.12);--g:#22C58B;--a:#FF5C8A;--y:#F5A623;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:var(--cloud);color:var(--txt);min-height:100vh;}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.nav-logo img{height:26px;object-fit:contain;}
+.nav-logo span{font-size:1.2rem;font-weight:900;color:var(--p);}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.nav-right a{font-size:.82rem;color:var(--muted);text-decoration:none;}
+.nav-btn{background:var(--p);color:#fff;padding:7px 16px;border-radius:20px;font-size:.8rem;font-weight:700;}
+
+/* Search bar */
+.search-wrap{background:#fff;border-bottom:1px solid var(--border);padding:14px 24px;}
+.search-bar{display:flex;gap:10px;max-width:900px;margin:0 auto;}
+.search-input{flex:1;padding:11px 16px;border:1.5px solid var(--border);border-radius:12px;font-size:.9rem;color:var(--txt);background:var(--cloud);outline:none;transition:border-color .2s;}
+.search-input:focus{border-color:var(--p);background:#fff;}
+.search-input::placeholder{color:var(--muted);}
+.search-btn{padding:11px 20px;background:var(--p);color:#fff;border:none;border-radius:12px;font-size:.88rem;font-weight:700;cursor:pointer;white-space:nowrap;}
+
+/* Filters */
+.filter-wrap{background:#fff;border-bottom:1px solid var(--border);padding:10px 24px;}
+.filter-scroll{display:flex;gap:8px;overflow-x:auto;max-width:900px;margin:0 auto;}
+.filter-scroll::-webkit-scrollbar{display:none;}
+.filter-chip{padding:6px 14px;border-radius:100px;font-size:.78rem;font-weight:600;white-space:nowrap;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--muted);transition:all .2s;flex-shrink:0;}
+.filter-chip:hover{border-color:var(--p);color:var(--p);}
+.filter-chip.on{background:var(--p);border-color:var(--p);color:#fff;}
+.filter-chip.urgent{border-color:var(--a);color:var(--a);}
+.filter-chip.urgent.on{background:var(--a);color:#fff;}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:300px 1fr;max-width:1100px;margin:0 auto;min-height:calc(100vh - 160px);}
+
+/* Sidebar */
+.sidebar{background:#fff;border-right:1px solid var(--border);padding:20px;position:sticky;top:112px;height:calc(100vh - 112px);overflow-y:auto;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--lilac);border-radius:10px;}
+.sidebar-title{font-size:.78rem;font-weight:800;color:var(--txt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;margin-top:16px;}
+.sidebar-title:first-child{margin-top:0;}
+.side-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
+.side-chip{padding:5px 12px;border-radius:100px;font-size:.75rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--muted);transition:all .2s;}
+.side-chip:hover{border-color:var(--p);}
+.side-chip.on{background:var(--p);border-color:var(--p);color:#fff;}
+
+.range-wrap{margin-bottom:4px;}
+.range-input{width:100%;accent-color:var(--p);}
+.range-label{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:4px;}
+
+.divider{height:1px;background:var(--border);margin:16px 0;}
+
+/* Job list */
+.job-list{padding:20px 24px;}
+.list-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.list-count{font-size:.85rem;color:var(--muted);}<br/>
+.sort-select{padding:7px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:.78rem;color:var(--txt);background:#fff;cursor:pointer;outline:none;}
+
+/* Job card */
+.job-card{background:#fff;border:1.5px solid var(--border);border-radius:18px;padding:20px;margin-bottom:12px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .15s;}
+.job-card:hover{border-color:rgba(122,59,255,.3);box-shadow:0 4px 20px rgba(122,59,255,.1);transform:translateY(-1px);}
+.job-card.featured{border-color:var(--p);background:linear-gradient(135deg,var(--misty),#fff);}
+.jc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.jc-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.jc-tag{font-size:.62rem;font-weight:700;padding:3px 9px;border-radius:6px;}
+.jc-tag.urgent{background:rgba(255,92,138,.12);color:#E03070;}
+.jc-tag.new{background:rgba(122,59,255,.12);color:var(--p);}
+.jc-tag.settle{background:rgba(34,197,139,.12);color:#16A870;}
+.jc-dist{font-size:.65rem;color:var(--muted);white-space:nowrap;}
+.jc-title{font-size:1rem;font-weight:800;margin-bottom:4px;color:var(--txt);}
+.jc-company{font-size:.78rem;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:4px;}
+.jc-company .rating{color:var(--y);font-weight:700;}
+.jc-info{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.jc-info-item{display:flex;align-items:center;gap:4px;font-size:.75rem;color:var(--txt-sub);}
+.jc-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border);}
+.jc-pay{font-size:1.1rem;font-weight:900;color:var(--p);}
+.jc-apply{padding:8px 18px;background:var(--p);color:#fff;border:none;border-radius:10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s;}
+.jc-apply:hover{background:var(--p2);transform:scale(1.03);}
+.jc-bookmark{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all .2s;}
+.jc-bookmark:hover{border-color:var(--p);}
+.jc-bookmark.on{background:var(--misty);border-color:var(--p);}
+
+/* Empty state */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);}
+.empty-icon{font-size:3rem;margin-bottom:12px;}
+.empty-text{font-size:.95rem;}
+
+/* Apply modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(30,27,46,.5);display:none;align-items:flex-end;justify-content:center;z-index:200;}
+.modal-overlay.show{display:flex;}
+.modal{background:#fff;border-radius:24px 24px 0 0;padding:32px 28px 40px;width:100%;max-width:480px;}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px;}
+.modal-title{font-size:1.1rem;font-weight:900;margin-bottom:4px;}
+.modal-sub{font-size:.85rem;color:var(--muted);margin-bottom:20px;}
+.modal-job-preview{background:var(--misty);border-radius:14px;padding:16px;margin-bottom:20px;}
+.mjp-title{font-size:.9rem;font-weight:800;margin-bottom:4px;}
+.mjp-meta{font-size:.75rem;color:var(--muted);}
+.mjp-pay{font-size:1rem;font-weight:900;color:var(--p);margin-top:8px;}
+.modal-btn{width:100%;padding:15px;background:var(--p);color:#fff;border:none;border-radius:14px;font-size:1rem;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(122,59,255,.3);margin-bottom:10px;}
+.modal-btn-sub{width:100%;padding:12px;background:#fff;border:1.5px solid var(--border);border-radius:14px;font-size:.9rem;color:var(--muted);cursor:pointer;}
+
+/* Success state */
+.success-wrap{text-align:center;padding:20px 0;}
+.success-icon{font-size:3rem;animation:popIn .5s cubic-bezier(.175,.885,.32,1.275);margin-bottom:12px;}
+@keyframes popIn{0%{transform:scale(0);}100%{transform:scale(1);}}
+
+@media(max-width:768px){
+  nav{padding:12px 16px;}
+  .search-wrap{padding:10px 16px;}
+  .filter-wrap{padding:8px 16px;}
+  .layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .job-list{padding:16px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="OJOb_logo.png" alt="OJOb" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span style="display:none">OJOb</span>
+  </a>
+  <div class="nav-right">
+    <a href="index.html">홈</a>
+    <a href="login.html" class="nav-btn">로그인</a>
+  </div>
+</nav>
+
+<!-- Search -->
+<div class="search-wrap">
+  <div class="search-bar">
+    <input type="text" class="search-input" placeholder="📍 강남구 역삼동 · 직종, 매장명 검색"/>
+    <button class="search-btn" onclick="searchJobs()">검색</button>
+  </div>
+</div>
+
+<!-- Filters -->
+<div class="filter-wrap">
+  <div class="filter-scroll">
+    <div class="filter-chip urgent on" onclick="toggleFilter(this)">🔴 급구</div>
+    <div class="filter-chip on" onclick="toggleFilter(this)">전체</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">🍽️ 홀서빙</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">🍳 주방</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">☕ 카페</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">🚴 배달</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">🛍️ 매장판매</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">📦 물류</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">🎤 이벤트</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">💼 사무보조</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">오늘</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">내일</div>
+    <div class="filter-chip" onclick="toggleFilter(this)">당일정산</div>
+  </div>
+</div>
+
+<!-- Layout -->
+<div class="layout">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-title">희망 지역</div>
+    <div class="side-chips">
+      <div class="side-chip on" onclick="toggleSide(this)">강남구</div>
+      <div class="side-chip" onclick="toggleSide(this)">서초구</div>
+      <div class="side-chip" onclick="toggleSide(this)">마포구</div>
+      <div class="side-chip" onclick="toggleSide(this)">송파구</div>
+      <div class="side-chip" onclick="toggleSide(this)">성동구</div>
+      <div class="side-chip" onclick="toggleSide(this)">용산구</div>
+      <div class="side-chip" onclick="toggleSide(this)">영등포구</div>
+      <div class="side-chip" onclick="toggleSide(this)">+ 더보기</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-title">거리</div>
+    <div class="range-wrap">
+      <input type="range" class="range-input" min="1" max="10" value="3" oninput="updateRange(this,'dist-label','km 이내')"/>
+      <div class="range-label"><span>1km</span><span id="dist-label">3km 이내</span><span>10km</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-title">시급</div>
+    <div class="range-wrap">
+      <input type="range" class="range-input" min="10000" max="30000" step="1000" value="10000" oninput="updateRange(this,'pay-label','원 이상')"/>
+      <div class="range-label"><span>10,000원</span><span id="pay-label">10,000원 이상</span><span>30,000원</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-title">근무 시간대</div>
+    <div class="side-chips">
+      <div class="side-chip" onclick="toggleSide(this)">오전</div>
+      <div class="side-chip" onclick="toggleSide(this)">오후</div>
+      <div class="side-chip" onclick="toggleSide(this)">저녁</div>
+      <div class="side-chip" onclick="toggleSide(this)">심야</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-title">근무 날짜</div>
+    <div class="side-chips">
+      <div class="side-chip on" onclick="toggleSide(this)">오늘</div>
+      <div class="side-chip" onclick="toggleSide(this)">내일</div>
+      <div class="side-chip" onclick="toggleSide(this)">이번 주</div>
+      <div class="side-chip" onclick="toggleSide(this)">날짜 선택</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-title">경력 조건</div>
+    <div class="side-chips">
+      <div class="side-chip on" onclick="toggleSide(this)">경력 무관</div>
+      <div class="side-chip" onclick="toggleSide(this)">경력 우대</div>
+    </div>
+  </div>
+
+  <!-- Job list -->
+  <div class="job-list">
+    <div class="list-header">
+      <div class="list-count">총 <strong style="color:var(--p)">24개</strong>의 공고</div>
+      <select class="sort-select">
+        <option>거리 순</option>
+        <option>최신 순</option>
+        <option>시급 높은 순</option>
+        <option>마감 임박 순</option>
+      </select>
+    </div>
+
+    <!-- Job cards -->
+    <div class="job-card featured" onclick="openApply('홀서빙 스태프','강남 이탈리안 레스토랑','오늘 17:00~22:00','₩68,000')">
+      <div class="jc-top">
+        <div class="jc-tags">
+          <span class="jc-tag urgent">🔴 급구</span>
+          <span class="jc-tag new">NEW</span>
+          <span class="jc-tag settle">당일정산</span>
+        </div>
+        <span class="jc-dist">📍 0.4km</span>
+      </div>
+      <div class="jc-title">홀서빙 스태프</div>
+      <div class="jc-company"><span>강남 이탈리안 레스토랑</span><span class="rating">⭐ 4.9</span><span style="font-size:.7rem;color:var(--muted);">(42)</span></div>
+      <div class="jc-info">
+        <div class="jc-info-item">📅 오늘</div>
+        <div class="jc-info-item">🕐 17:00~22:00</div>
+        <div class="jc-info-item">⏱ 5시간</div>
+        <div class="jc-info-item">👥 1명 모집</div>
+      </div>
+      <div class="jc-bottom">
+        <div class="jc-pay">₩68,000 <span style="font-size:.72rem;font-weight:400;color:var(--muted);">(시급 13,600)</span></div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div class="jc-bookmark" onclick="event.stopPropagation();toggleBookmark(this)">🤍</div>
+          <button class="jc-apply" onclick="event.stopPropagation();openApply('홀서빙 스태프','강남 이탈리안 레스토랑','오늘 17:00~22:00','₩68,000')">바로 지원</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-card" onclick="openApply('주방 보조','마포구 한식당','오늘 10:00~15:00','₩65,000')">
+      <div class="jc-top">
+        <div class="jc-tags">
+          <span class="jc-tag urgent">🔴 급구</span>
+          <span class="jc-tag settle">당일정산</span>
+        </div>
+        <span class="jc-dist">📍 1.2km</span>
+      </div>
+      <div class="jc-title">주방 보조</div>
+      <div class="jc-company"><span>마포구 한식당</span><span class="rating">⭐ 4.7</span><span style="font-size:.7rem;color:var(--muted);">(28)</span></div>
+      <div class="jc-info">
+        <div class="jc-info-item">📅 오늘</div>
+        <div class="jc-info-item">🕐 10:00~15:00</div>
+        <div class="jc-info-item">⏱ 5시간</div>
+        <div class="jc-info-item">👥 1명 모집</div>
+      </div>
+      <div class="jc-bottom">
+        <div class="jc-pay">₩65,000 <span style="font-size:.72rem;font-weight:400;color:var(--muted);">(시급 13,000)</span></div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div class="jc-bookmark" onclick="event.stopPropagation();toggleBookmark(this)">🤍</div>
+          <button class="jc-apply" onclick="event.stopPropagation();openApply('주방 보조','마포구 한식당','오늘 10:00~15:00','₩65,000')">바로 지원</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-card" onclick="openApply('팝업스토어 스태프','성동구 팝업 행사','내일 11:00~18:00','₩98,000')">
+      <div class="jc-top">
+        <div class="jc-tags">
+          <span class="jc-tag new">🟢 이벤트</span>
+          <span class="jc-tag settle">당일정산</span>
+        </div>
+        <span class="jc-dist">📍 1.8km</span>
+      </div>
+      <div class="jc-title">팝업스토어 스태프</div>
+      <div class="jc-company"><span>성동구 팝업 행사</span><span class="rating">⭐ 4.8</span><span style="font-size:.7rem;color:var(--muted);">(15)</span></div>
+      <div class="jc-info">
+        <div class="jc-info-item">📅 내일</div>
+        <div class="jc-info-item">🕐 11:00~18:00</div>
+        <div class="jc-info-item">⏱ 7시간</div>
+        <div class="jc-info-item">👥 3명 모집</div>
+      </div>
+      <div class="jc-bottom">
+        <div class="jc-pay">₩98,000 <span style="font-size:.72rem;font-weight:400;color:var(--muted);">(시급 14,000)</span></div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div class="jc-bookmark" onclick="event.stopPropagation();toggleBookmark(this)">🤍</div>
+          <button class="jc-apply" onclick="event.stopPropagation();openApply('팝업스토어 스태프','성동구 팝업 행사','내일 11:00~18:00','₩98,000')">바로 지원</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-card">
+      <div class="jc-top">
+        <div class="jc-tags"><span class="jc-tag" style="background:rgba(245,166,35,.12);color:#C97B00;">🟡 배달</span></div>
+        <span class="jc-dist">📍 2.1km</span>
+      </div>
+      <div class="jc-title">배달 라이더</div>
+      <div class="jc-company"><span>송파구 배달 업체</span><span class="rating">⭐ 4.5</span><span style="font-size:.7rem;color:var(--muted);">(67)</span></div>
+      <div class="jc-info">
+        <div class="jc-info-item">📅 내일</div>
+        <div class="jc-info-item">🕐 19:00~23:00</div>
+        <div class="jc-info-item">⏱ 4시간</div>
+        <div class="jc-info-item">👥 2명 모집</div>
+      </div>
+      <div class="jc-bottom">
+        <div class="jc-pay">₩56,000 <span style="font-size:.72rem;font-weight:400;color:var(--muted);">(시급 14,000)</span></div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div class="jc-bookmark" onclick="event.stopPropagation();toggleBookmark(this)">🤍</div>
+          <button class="jc-apply" onclick="event.stopPropagation();openApply('배달 라이더','송파구 배달 업체','내일 19:00~23:00','₩56,000')">바로 지원</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-card">
+      <div class="jc-top">
+        <div class="jc-tags"><span class="jc-tag" style="background:rgba(122,59,255,.12);color:var(--p);">☕ 카페</span><span class="jc-tag settle">당일정산</span></div>
+        <span class="jc-dist">📍 0.8km</span>
+      </div>
+      <div class="jc-title">카페 아르바이트</div>
+      <div class="jc-company"><span>강남구 스페셜티 카페</span><span class="rating">⭐ 4.9</span><span style="font-size:.7rem;color:var(--muted);">(89)</span></div>
+      <div class="jc-info">
+        <div class="jc-info-item">📅 이번 주</div>
+        <div class="jc-info-item">🕐 09:00~14:00</div>
+        <div class="jc-info-item">⏱ 5시간</div>
+        <div class="jc-info-item">👥 1명 모집</div>
+      </div>
+      <div class="jc-bottom">
+        <div class="jc-pay">₩70,000 <span style="font-size:.72rem;font-weight:400;color:var(--muted);">(시급 14,000)</span></div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div class="jc-bookmark" onclick="event.stopPropagation();toggleBookmark(this)">🤍</div>
+          <button class="jc-apply" onclick="event.stopPropagation();openApply('카페 아르바이트','강남구 스페셜티 카페','이번 주 09:00~14:00','₩70,000')">바로 지원</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Apply Modal -->
+<div class="modal-overlay" id="apply-modal" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <div class="modal-handle"></div>
+    <div id="modal-apply-view">
+      <div class="modal-title" id="modal-job-title">홀서빙 스태프</div>
+      <div class="modal-sub" id="modal-job-company">강남 이탈리안 레스토랑</div>
+      <div class="modal-job-preview">
+        <div class="mjp-title" id="mprev-title">홀서빙 스태프</div>
+        <div class="mjp-meta" id="mprev-meta">오늘 17:00~22:00 · 5시간</div>
+        <div class="mjp-pay" id="mprev-pay">₩68,000</div>
+      </div>
+      <button class="modal-btn" onclick="applyJob()">⚡ 바로 지원하기</button>
+      <button class="modal-btn-sub" onclick="closeModal()">닫기</button>
+    </div>
+    <div id="modal-success-view" style="display:none">
+      <div class="success-wrap">
+        <div class="success-icon">🎉</div>
+        <div class="modal-title">지원 완료!</div>
+        <div class="modal-sub" style="margin-bottom:20px;">사업주가 확인 중이에요.<br/>승인되면 바로 알려드릴게요.</div>
+        <button class="modal-btn" onclick="window.location.href='login.html'">내 지원 현황 보기</button>
+        <button class="modal-btn-sub" onclick="closeModal()">계속 탐색하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleFilter(el) {
+  el.classList.toggle('on');
+}
+function toggleSide(el) {
+  el.classList.toggle('on');
+}
+function toggleBookmark(el) {
+  el.classList.toggle('on');
+  el.textContent = el.classList.contains('on') ? '🩷' : '🤍';
+}
+function updateRange(input, labelId, suffix) {
+  const v = parseInt(input.value);
+  document.getElementById(labelId).textContent = v.toLocaleString() + suffix;
+}
+function searchJobs() {}
+
+let currentJob = {};
+function openApply(title, company, time, pay) {
+  currentJob = {title, company, time, pay};
+  document.getElementById('modal-job-title').textContent = title;
+  document.getElementById('modal-job-company').textContent = company;
+  document.getElementById('mprev-title').textContent = title;
+  document.getElementById('mprev-meta').textContent = time;
+  document.getElementById('mprev-pay').textContent = pay;
+  document.getElementById('modal-apply-view').style.display = 'block';
+  document.getElementById('modal-success-view').style.display = 'none';
+  document.getElementById('apply-modal').classList.add('show');
+}
+function applyJob() {
+  document.getElementById('modal-apply-view').style.display = 'none';
+  document.getElementById('modal-success-view').style.display = 'block';
+}
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('apply-modal')) {
+    document.getElementById('apply-modal').classList.remove('show');
+  }
+}
+</script>
+</body>
+</html>

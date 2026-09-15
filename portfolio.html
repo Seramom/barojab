@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>이승아 — OJOb 포트폴리오</title>
+<style>
+:root{--p:#7A3BFF;--p2:#5820CC;--lilac:#D8B4FC;--misty:#F4ECFF;--charcoal:#1E1B2E;--cloud:#F7F7FA;--txt:#1E1B2E;--txt-sub:#3A3060;--muted:#8878B8;--border:rgba(122,59,255,0.12);--g:#22C58B;--a:#FF5C8A;--y:#F5A623;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:var(--cloud);color:var(--txt);min-height:100vh;}
+
+/* Nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:#fff;border-bottom:1px solid var(--border);}
+.nav-logo img{height:26px;object-fit:contain;}
+.nav-logo span{font-size:1.2rem;font-weight:900;color:var(--p);}
+.nav-share{display:flex;gap:10px;align-items:center;}
+.share-btn{padding:8px 18px;border:1.5px solid var(--border);border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;background:#fff;color:var(--txt);transition:all .2s;}
+.share-btn:hover{border-color:var(--p);color:var(--p);}
+.hire-btn{padding:8px 18px;background:var(--p);color:#fff;border:none;border-radius:20px;font-size:.8rem;font-weight:700;cursor:pointer;}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,var(--charcoal) 0%,#2D1A5E 100%);padding:48px 32px;position:relative;overflow:hidden;}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;}
+.hero-orb-1{width:300px;height:300px;background:rgba(122,59,255,.2);top:-80px;right:-60px;}
+.hero-orb-2{width:200px;height:200px;background:rgba(216,180,252,.1);bottom:-40px;left:-40px;}
+.hero-inner{max-width:800px;margin:0 auto;position:relative;z-index:1;}
+.hero-top{display:flex;align-items:flex-start;gap:20px;margin-bottom:24px;flex-wrap:wrap;}
+.hero-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--lilac));display:flex;align-items:center;justify-content:center;font-size:2rem;border:3px solid rgba(255,255,255,.2);flex-shrink:0;}
+.hero-info{flex:1;}
+.hero-name{font-size:1.6rem;font-weight:900;color:#fff;margin-bottom:4px;}
+.hero-handle{font-size:.85rem;color:var(--lilac);margin-bottom:8px;}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.hero-tag{padding:4px 12px;border-radius:100px;font-size:.72rem;font-weight:700;background:rgba(122,59,255,.25);color:var(--lilac);border:1px solid rgba(122,59,255,.3);}
+.hero-tag.verified{background:rgba(34,197,139,.15);color:#5CDBA8;border-color:rgba(34,197,139,.3);}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(122,59,255,.2);border:1px solid rgba(122,59,255,.4);border-radius:100px;padding:6px 16px;font-size:.78rem;color:#fff;font-weight:600;}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:0;}
+.stat-item{background:rgba(255,255,255,.08);border-radius:16px;padding:16px;text-align:center;border:1px solid rgba(255,255,255,.08);}
+.stat-n{font-size:1.5rem;font-weight:900;color:var(--lilac);}
+.stat-l{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:3px;}
+
+/* Content */
+.content{max-width:800px;margin:0 auto;padding:24px 32px 60px;}
+
+/* Card */
+.card{background:#fff;border-radius:20px;padding:24px;margin-bottom:16px;border:1.5px solid var(--border);}
+.card-title{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:6px;}
+
+/* Skills */
+.skill-list{display:flex;flex-direction:column;gap:10px;}
+.skill-item{display:flex;align-items:center;gap:12px;}
+.skill-name{font-size:.88rem;font-weight:700;width:80px;flex-shrink:0;}
+.skill-bar-wrap{flex:1;height:8px;background:var(--misty);border-radius:100px;overflow:hidden;}
+.skill-bar{height:100%;background:linear-gradient(90deg,var(--p),var(--lilac));border-radius:100px;transition:width 1.5s ease;}
+.skill-hours{font-size:.72rem;color:var(--muted);width:50px;text-align:right;}
+.skill-badge{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:100px;background:rgba(34,197,139,.12);color:#16A870;flex-shrink:0;}
+
+/* Review score */
+.review-scores{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.rs-item{background:var(--misty);border-radius:12px;padding:12px;}
+.rs-label{font-size:.72rem;color:var(--muted);margin-bottom:4px;}
+.rs-bar{height:6px;background:rgba(122,59,255,.15);border-radius:100px;overflow:hidden;margin-bottom:4px;}
+.rs-fill{height:100%;background:var(--p);border-radius:100px;}
+.rs-score{font-size:.85rem;font-weight:800;color:var(--p);}
+
+/* Reviews */
+.review-list{display:flex;flex-direction:column;gap:12px;}
+.review-item{padding:16px;background:var(--cloud);border-radius:14px;}
+.rv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.rv-shop{font-size:.85rem;font-weight:700;}
+.rv-stars{font-size:.8rem;color:var(--y);}
+.rv-date{font-size:.7rem;color:var(--muted);}
+.rv-txt{font-size:.85rem;color:var(--txt-sub);line-height:1.6;}
+.rv-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.rv-tag{font-size:.65rem;font-weight:600;padding:2px 8px;border-radius:100px;background:rgba(122,59,255,.08);color:var(--p);}
+
+/* Work history */
+.work-list{display:flex;flex-direction:column;gap:10px;}
+.work-item{display:flex;gap:14px;align-items:flex-start;}
+.work-icon{width:40px;height:40px;border-radius:12px;background:var(--misty);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.work-info{flex:1;}
+.work-title{font-size:.88rem;font-weight:700;}
+.work-meta{font-size:.72rem;color:var(--muted);margin-top:2px;}
+.work-pay{font-size:.82rem;font-weight:700;color:var(--p);}
+.work-badge{font-size:.62rem;padding:2px 8px;border-radius:100px;background:rgba(34,197,139,.12);color:#16A870;font-weight:700;}
+
+/* Hire CTA */
+.hire-cta{background:linear-gradient(135deg,var(--p),var(--p2));border-radius:20px;padding:28px;text-align:center;margin-bottom:16px;}
+.hire-cta h3{font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:6px;}
+.hire-cta p{font-size:.85rem;color:rgba(255,255,255,.7);margin-bottom:20px;}
+.hire-cta-btn{display:inline-block;background:#fff;color:var(--p);padding:12px 28px;border-radius:12px;font-weight:800;font-size:.95rem;text-decoration:none;cursor:pointer;border:none;}
+
+/* Share bar */
+.share-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;z-index:100;}
+.share-bar-left{font-size:.82rem;color:var(--muted);}
+.share-bar-left strong{color:var(--txt);}
+.share-bar-btns{display:flex;gap:8px;}
+.sbb{padding:10px 20px;border-radius:12px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;}
+.sbb-main{background:var(--p);color:#fff;}
+.sbb-sub{background:var(--misty);color:var(--p);}
+
+@media(max-width:600px){
+  nav{padding:12px 16px;}
+  .hero{padding:32px 16px;}
+  .content{padding:20px 16px 100px;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .review-scores{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="OJOb_logo.png" alt="OJOb" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span style="display:none">OJOb</span>
+  </a>
+  <div class="nav-share">
+    <button class="share-btn" onclick="sharePortfolio()">🔗 공유하기</button>
+    <button class="hire-btn" onclick="openHire()">📩 매칭 요청</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="hero-avatar">👩</div>
+      <div class="hero-info">
+        <div class="hero-name">이승아</div>
+        <div class="hero-handle">🔗 ojob.kr/p/sa.yi</div>
+        <div class="hero-tags">
+          <span class="hero-tag verified">✅ 홀서빙 인증</span>
+          <span class="hero-tag verified">✅ 주방보조 인증</span>
+          <span class="hero-tag verified">✅ 카페 인증</span>
+          <span class="hero-tag">재고용률 94%</span>
+        </div>
+      </div>
+      <div class="hero-badge">⭐ 4.9 · 리뷰 38개</div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-n">192h</div><div class="stat-l">누적 근무 시간</div></div>
+      <div class="stat-item"><div class="stat-n">32회</div><div class="stat-l">총 시프트 수</div></div>
+      <div class="stat-item"><div class="stat-n">94%</div><div class="stat-l">재고용률</div></div>
+      <div class="stat-item"><div class="stat-n">0회</div><div class="stat-l">노쇼 이력</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+  <!-- Skills -->
+  <div class="card">
+    <div class="card-title">🎖️ 인증된 스킬</div>
+    <div class="skill-list">
+      <div class="skill-item">
+        <div class="skill-name">홀서빙</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div>
+        <div class="skill-hours">78h</div>
+        <div class="skill-badge">인증 ✅</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">주방보조</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:62%"></div></div>
+        <div class="skill-hours">64h</div>
+        <div class="skill-badge">인증 ✅</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">카페</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:32%"></div></div>
+        <div class="skill-hours">32h</div>
+        <div class="skill-badge">인증 ✅</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">이벤트</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:18%"></div></div>
+        <div class="skill-hours">18h</div>
+        <div class="skill-badge" style="background:rgba(122,59,255,.1);color:var(--p);">미인증</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review scores -->
+  <div class="card">
+    <div class="card-title">📊 5개 항목 평가</div>
+    <div class="review-scores">
+      <div class="rs-item">
+        <div class="rs-label">태도·성실성</div>
+        <div class="rs-bar"><div class="rs-fill" style="width:98%"></div></div>
+        <div class="rs-score">4.9</div>
+      </div>
+      <div class="rs-item">
+        <div class="rs-label">시간 약속</div>
+        <div class="rs-bar"><div class="rs-fill" style="width:100%"></div></div>
+        <div class="rs-score">5.0</div>
+      </div>
+      <div class="rs-item">
+        <div class="rs-label">업무 능력</div>
+        <div class="rs-bar"><div class="rs-fill" style="width:96%"></div></div>
+        <div class="rs-score">4.8</div>
+      </div>
+      <div class="rs-item">
+        <div class="rs-label">소통·협력</div>
+        <div class="rs-bar"><div class="rs-fill" style="width:98%"></div></div>
+        <div class="rs-score">4.9</div>
+      </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="review-list">
+      <div class="review-item">
+        <div class="rv-top">
+          <div>
+            <div class="rv-shop">강남 이탈리안 레스토랑</div>
+            <div class="rv-date">2025.07.12 · 홀서빙 5시간</div>
+          </div>
+          <div class="rv-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="rv-txt">"눈치 빠르고 서빙이 자연스러워서 정말 좋았어요. 또 불러도 될 것 같아요!"</div>
+        <div class="rv-tags">
+          <span class="rv-tag">눈치 빠름</span>
+          <span class="rv-tag">친절함</span>
+          <span class="rv-tag">재고용 의사 있음</span>
+        </div>
+      </div>
+      <div class="review-item">
+        <div class="rv-top">
+          <div>
+            <div class="rv-shop">마포 한식당</div>
+            <div class="rv-date">2025.07.10 · 주방보조 5시간</div>
+          </div>
+          <div class="rv-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="rv-txt">"위생 철저하고 주방 일을 잘 도와줬어요. 빠르게 적응하는 모습이 인상적이었어요."</div>
+        <div class="rv-tags">
+          <span class="rv-tag">위생 철저</span>
+          <span class="rv-tag">빠른 적응</span>
+        </div>
+      </div>
+      <div class="review-item">
+        <div class="rv-top">
+          <div>
+            <div class="rv-shop">성동구 팝업 행사</div>
+            <div class="rv-date">2025.07.05 · 이벤트 스태프 7시간</div>
+          </div>
+          <div class="rv-stars">⭐⭐⭐⭐</div>
+        </div>
+        <div class="rv-txt">"친절하고 밝아서 손님들 반응도 좋았습니다. 다음 행사 때도 함께하고 싶어요."</div>
+        <div class="rv-tags">
+          <span class="rv-tag">밝은 에너지</span>
+          <span class="rv-tag">손님 친화적</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Work history -->
+  <div class="card">
+    <div class="card-title">📋 근무 이력</div>
+    <div class="work-list">
+      <div class="work-item">
+        <div class="work-icon">🍽️</div>
+        <div class="work-info">
+          <div class="work-title">홀서빙 스태프 — 강남 이탈리안</div>
+          <div class="work-meta">2025.07.12 · 17:00~22:00 · 5시간</div>
+        </div>
+        <div>
+          <div class="work-pay">₩68,000</div>
+          <div class="work-badge" style="margin-top:3px;">정산완료</div>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-icon">🍳</div>
+        <div class="work-info">
+          <div class="work-title">주방보조 — 마포구 한식당</div>
+          <div class="work-meta">2025.07.10 · 10:00~15:00 · 5시간</div>
+        </div>
+        <div>
+          <div class="work-pay">₩65,000</div>
+          <div class="work-badge" style="margin-top:3px;">정산완료</div>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-icon">🎤</div>
+        <div class="work-info">
+          <div class="work-title">팝업스토어 스태프 — 성동구</div>
+          <div class="work-meta">2025.07.05 · 11:00~18:00 · 7시간</div>
+        </div>
+        <div>
+          <div class="work-pay">₩98,000</div>
+          <div class="work-badge" style="margin-top:3px;">정산완료</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hire CTA -->
+  <div class="hire-cta">
+    <h3>이승아님과 함께 일하고 싶으세요?</h3>
+    <p>직접 매칭 요청을 보내보세요. 평균 30분 내에 답변을 드려요.</p>
+    <button class="hire-cta-btn" onclick="openHire()">📩 매칭 요청 보내기</button>
+  </div>
+
+</div>
+
+<!-- Share bar -->
+<div class="share-bar">
+  <div class="share-bar-left">
+    <strong>ojob.kr/p/sa.yi</strong> · 이 포트폴리오 공유하기
+  </div>
+  <div class="share-bar-btns">
+    <button class="sbb sbb-sub" onclick="sharePortfolio()">🔗 링크 복사</button>
+    <button class="sbb sbb-main" onclick="openHire()">📩 매칭 요청</button>
+  </div>
+</div>
+
+<script>
+function sharePortfolio() {
+  if (navigator.share) {
+    navigator.share({
+      title: '이승아 — OJOb 포트폴리오',
+      text: '⭐ 4.9 · 재고용률 94% · 홀서빙·주방보조·카페 인증',
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href);
+    alert('링크가 복사됐어요!');
+  }
+}
+
+function openHire() {
+  alert('매칭 요청 기능은 로그인 후 이용 가능해요!\n\n사업주로 로그인하면 바로 요청할 수 있어요.');
+}
+
+// Animate skill bars on load
+setTimeout(() => {
+  document.querySelectorAll('.skill-bar').forEach(bar => {
+    const w = bar.style.width;
+    bar.style.width = '0%';
+    setTimeout(() => bar.style.width = w, 100);
+  });
+}, 300);
+</script>
+</body>
+</html>
