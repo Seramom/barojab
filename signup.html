@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OJOb — 회원가입</title>
+<style>
+:root {
+  --p: #7A3BFF;
+  --p2: #5820CC;
+  --lilac: #D8B4FC;
+  --misty: #F4ECFF;
+  --charcoal: #1E1B2E;
+  --cloud: #F7F7FA;
+  --txt: #1E1B2E;
+  --txt-sub: #3A3060;
+  --muted: #8878B8;
+  --border: rgba(122,59,255,0.12);
+  --g: #22C58B;
+  --card: #FFFFFF;
+  --error: #FF5C8A;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:var(--cloud);color:var(--txt);min-height:100vh;display:flex;flex-direction:column;}
+
+/* ── NAV ── */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.nav-logo img{height:28px;object-fit:contain;}
+.nav-logo span{font-size:1.3rem;font-weight:900;color:var(--p);}
+.nav-login{font-size:.875rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-login:hover{color:var(--p);}
+
+/* ── MAIN ── */
+main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px 60px;}
+
+/* ── CARD ── */
+.signup-card{
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 8px 40px rgba(122,59,255,.1);
+  width:100%;max-width:480px;
+  overflow:hidden;
+}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{padding:0;background:var(--misty);}
+.progress-bar{
+  height:4px;
+  background:linear-gradient(90deg,var(--p),var(--lilac));
+  transition:width .4s ease;
+  border-radius:0 4px 4px 0;
+}
+.progress-label{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 24px 6px;
+  font-size:.72rem;color:var(--muted);
+}
+.step-indicator{font-weight:700;color:var(--p);}
+
+/* ── STEP CONTENT ── */
+.step{display:none;animation:fadeIn .3s ease;}
+.step.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+.step-inner{padding:32px 28px 24px;}
+
+.step-icon{font-size:2.4rem;margin-bottom:16px;}
+.step-title{font-size:1.3rem;font-weight:900;margin-bottom:6px;color:var(--txt);}
+.step-desc{font-size:.9rem;color:var(--muted);margin-bottom:28px;line-height:1.6;}
+
+/* ── TYPE SELECT (Step 0) ── */
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px;}
+.type-card{
+  border:2px solid var(--border);
+  border-radius:18px;padding:28px 16px;
+  text-align:center;cursor:pointer;
+  transition:all .25s;background:#fff;
+}
+.type-card:hover{border-color:var(--p);background:var(--misty);transform:translateY(-2px);}
+.type-card.selected{border-color:var(--p);background:var(--misty);}
+.type-card .tc-icon{font-size:2.8rem;margin-bottom:12px;}
+.type-card .tc-title{font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:4px;}
+.type-card .tc-desc{font-size:.75rem;color:var(--muted);line-height:1.4;}
+
+/* ── FORM ELEMENTS ── */
+.form-group{margin-bottom:18px;}
+.form-label{display:block;font-size:.82rem;font-weight:700;color:var(--txt-sub);margin-bottom:6px;}
+.form-label .req{color:var(--p);margin-left:2px;}
+
+.form-input{
+  width:100%;padding:13px 16px;
+  border:1.5px solid var(--border);
+  border-radius:12px;font-size:.95rem;
+  color:var(--txt);background:#fff;
+  font-family:inherit;outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.form-input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(122,59,255,.08);}
+.form-input::placeholder{color:var(--muted);}
+
+.form-input-group{display:flex;gap:8px;}
+.form-input-group .form-input{flex:1;}
+
+.send-btn{
+  padding:13px 16px;background:var(--misty);
+  border:1.5px solid var(--lilac);
+  border-radius:12px;font-size:.82rem;font-weight:700;
+  color:var(--p);cursor:pointer;white-space:nowrap;
+  transition:all .2s;
+}
+.send-btn:hover{background:var(--p);color:#fff;border-color:var(--p);}
+.send-btn:disabled{opacity:.5;cursor:not-allowed;}
+
+.form-hint{font-size:.75rem;color:var(--muted);margin-top:5px;}
+.form-error{font-size:.75rem;color:var(--error);margin-top:5px;display:none;}
+
+/* ── AUTH OPTIONS ── */
+.auth-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.auth-opt{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border:1.5px solid var(--border);
+  border-radius:12px;cursor:pointer;
+  transition:all .2s;background:#fff;
+}
+.auth-opt:hover{border-color:var(--p);background:var(--misty);}
+.auth-opt.selected{border-color:var(--p);background:var(--misty);}
+.auth-opt .ao-icon{font-size:1.4rem;width:36px;text-align:center;}
+.auth-opt .ao-text .ao-title{font-size:.88rem;font-weight:700;color:var(--txt);}
+.auth-opt .ao-text .ao-sub{font-size:.72rem;color:var(--muted);}
+.auth-opt .ao-check{margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.7rem;transition:all .2s;}
+.auth-opt.selected .ao-check{background:var(--p);border-color:var(--p);color:#fff;}
+
+/* ── PHOTO UPLOAD ── */
+.photo-upload{
+  width:90px;height:90px;border-radius:50%;
+  border:2px dashed var(--lilac);background:var(--misty);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;margin:0 auto 20px;transition:all .2s;
+  font-size:1.6rem;color:var(--muted);
+}
+.photo-upload:hover{border-color:var(--p);background:var(--misty);color:var(--p);}
+.photo-upload .pu-label{font-size:.65rem;margin-top:4px;font-weight:600;}
+
+/* ── DATE INPUT ── */
+.date-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.form-select{
+  width:100%;padding:13px 12px;
+  border:1.5px solid var(--border);
+  border-radius:12px;font-size:.88rem;
+  color:var(--txt);background:#fff;
+  font-family:inherit;outline:none;
+  cursor:pointer;
+  transition:border-color .2s;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%238878B8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;
+  padding-right:32px;
+}
+.form-select:focus{border-color:var(--p);}
+
+/* ── TAG CHIPS ── */
+.tag-wrap{display:flex;flex-wrap:wrap;gap:8px;}
+.tag-chip{
+  padding:7px 14px;border-radius:100px;
+  font-size:.82rem;font-weight:600;cursor:pointer;
+  border:1.5px solid var(--border);background:#fff;color:var(--muted);
+  transition:all .2s;
+}
+.tag-chip:hover{border-color:var(--p);color:var(--p);}
+.tag-chip.on{background:var(--p);border-color:var(--p);color:#fff;}
+
+/* ── TIME GRID ── */
+.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.time-chip{
+  padding:10px 8px;border-radius:10px;text-align:center;
+  border:1.5px solid var(--border);background:#fff;cursor:pointer;
+  transition:all .2s;
+}
+.time-chip:hover{border-color:var(--p);}
+.time-chip.on{background:var(--p);border-color:var(--p);}
+.time-chip .tc-t{font-size:.75rem;font-weight:700;color:var(--txt);}
+.time-chip .tc-s{font-size:.65rem;color:var(--muted);}
+.time-chip.on .tc-t,.time-chip.on .tc-s{color:#fff;}
+
+/* ── CAREER OPTIONS ── */
+.career-opts{display:flex;flex-direction:column;gap:10px;}
+.career-opt{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border:1.5px solid var(--border);
+  border-radius:12px;cursor:pointer;transition:all .2s;
+}
+.career-opt:hover{border-color:var(--p);}
+.career-opt.selected{border-color:var(--p);background:var(--misty);}
+.career-opt .co-icon{font-size:1.4rem;}
+.career-opt .co-text .co-title{font-size:.88rem;font-weight:700;}
+.career-opt .co-text .co-sub{font-size:.72rem;color:var(--muted);}
+.career-opt .co-arrow{margin-left:auto;color:var(--muted);font-size:.9rem;}
+
+/* ── BANK INPUT ── */
+.bank-select-wrap{display:flex;gap:8px;margin-bottom:12px;}
+
+/* ── TERMS ── */
+.terms-list{display:flex;flex-direction:column;gap:10px;}
+.term-item{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .2s;}
+.term-item:hover{border-color:var(--lilac);}
+.term-check{width:20px;height:20px;border-radius:6px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.term-check.checked{background:var(--p);border-color:var(--p);color:#fff;font-size:.7rem;}
+.term-text{flex:1;font-size:.82rem;color:var(--txt-sub);}
+.term-link{font-size:.75rem;color:var(--p);margin-left:auto;text-decoration:none;white-space:nowrap;}
+.term-all{background:var(--misty);border-color:var(--lilac);}
+.term-all .term-text{font-weight:700;color:var(--txt);}
+
+/* ── COMPLETE SCREEN ── */
+.complete-screen{text-align:center;padding:48px 28px;}
+.complete-icon{font-size:4rem;animation:popIn .5s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes popIn{0%{transform:scale(0);}100%{transform:scale(1);}}
+.complete-title{font-size:1.5rem;font-weight:900;margin:16px 0 8px;color:var(--txt);}
+.complete-desc{font-size:.95rem;color:var(--muted);line-height:1.7;margin-bottom:32px;}
+.complete-card{
+  background:var(--misty);border-radius:16px;
+  padding:20px;margin-bottom:24px;text-align:left;
+}
+.complete-card .cc-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(122,59,255,.08);}
+.complete-card .cc-row:last-child{border-bottom:none;}
+.complete-card .cc-k{font-size:.8rem;color:var(--muted);}
+.complete-card .cc-v{font-size:.85rem;font-weight:700;color:var(--txt);}
+
+/* ── BUTTONS ── */
+.btn-wrap{padding:0 28px 28px;display:flex;flex-direction:column;gap:10px;}
+.btn-next{
+  width:100%;padding:15px;
+  background:var(--p);color:#fff;
+  border:none;border-radius:14px;
+  font-size:1rem;font-weight:800;cursor:pointer;
+  box-shadow:0 4px 16px rgba(122,59,255,.3);
+  transition:transform .2s,box-shadow .2s,background .2s;
+}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(122,59,255,.4);}
+.btn-next:disabled{background:var(--lilac);box-shadow:none;cursor:not-allowed;transform:none;}
+.btn-back{
+  width:100%;padding:13px;
+  background:transparent;color:var(--muted);
+  border:1.5px solid var(--border);border-radius:14px;
+  font-size:.9rem;font-weight:600;cursor:pointer;
+  transition:all .2s;
+}
+.btn-back:hover{border-color:var(--p);color:var(--p);}
+.btn-primary-full{
+  width:100%;padding:15px;
+  background:var(--p);color:#fff;
+  border:none;border-radius:14px;
+  font-size:1rem;font-weight:800;cursor:pointer;
+  box-shadow:0 4px 16px rgba(122,59,255,.3);
+  text-decoration:none;display:block;text-align:center;
+}
+
+/* ── DIVIDER ── */
+.or-divider{display:flex;align-items:center;gap:12px;margin:16px 0;color:var(--muted);font-size:.8rem;}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* ── BUSINESS TYPE GRID ── */
+.biz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.biz-chip{
+  padding:10px 6px;border-radius:10px;text-align:center;
+  border:1.5px solid var(--border);background:#fff;cursor:pointer;
+  transition:all .2s;
+}
+.biz-chip:hover{border-color:var(--p);}
+.biz-chip.on{background:var(--p);border-color:var(--p);}
+.biz-chip .bc-icon{font-size:1.3rem;margin-bottom:3px;}
+.biz-chip .bc-text{font-size:.65rem;font-weight:600;color:var(--txt-sub);}
+.biz-chip.on .bc-text{color:#fff;}
+
+/* ── MAP TABS ── */
+.map-tabs{display:flex;gap:0;margin-bottom:12px;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.map-tab{flex:1;padding:10px;text-align:center;font-size:.8rem;font-weight:700;cursor:pointer;background:#fff;color:var(--muted);border:none;transition:all .2s;}
+.map-tab.on{background:var(--p);color:#fff;}
+
+/* ── ADDRESS RESULT ── */
+.addr-result{
+  background:var(--misty);border:1.5px solid var(--lilac);
+  border-radius:10px;padding:12px 14px;
+  font-size:.85rem;color:var(--txt);margin-top:10px;
+  display:none;
+}
+.addr-result.show{display:block;}
+
+/* ── UPLOAD AREA ── */
+.upload-area{
+  border:2px dashed var(--lilac);border-radius:14px;
+  padding:24px;text-align:center;cursor:pointer;
+  background:var(--misty);transition:all .2s;margin-bottom:12px;
+}
+.upload-area:hover{border-color:var(--p);background:#ede8ff;}
+.upload-area .ua-icon{font-size:2rem;margin-bottom:8px;}
+.upload-area .ua-text{font-size:.85rem;color:var(--muted);}
+.upload-area .ua-sub{font-size:.72rem;color:var(--lilac);margin-top:3px;}
+
+@media(max-width:520px){
+  nav{padding:14px 20px;}
+  main{padding:20px 12px 48px;}
+  .step-inner{padding:24px 20px 20px;}
+  .btn-wrap{padding:0 20px 20px;}
+  .type-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="OJOb_logo.png" alt="OJOb" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span style="display:none">OJOb</span>
+  </a>
+  <div style="display:flex;gap:16px;align-items:center;"><a href="index.html" style="font-size:.82rem;color:var(--muted);text-decoration:none;">← 메인으로</a><a href="#" class="nav-login">이미 계정이 있어요 → 로그인</a></div>
+</nav>
+
+<main>
+  <div class="signup-card">
+
+    <!-- PROGRESS -->
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="step-label">시작하기</span>
+        <span class="step-indicator" id="step-counter"></span>
+      </div>
+      <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+    </div>
+
+    <!-- ── STEP 0: 유형 선택 ── -->
+    <div class="step active" id="step-0">
+      <div class="step-inner">
+        <div class="step-icon">👋</div>
+        <div class="step-title">OJOb에 오신 걸 환영해요!</div>
+        <div class="step-desc">어떤 방식으로 사용하실 건가요?</div>
+        <div class="type-grid">
+          <div class="type-card" id="type-worker" onclick="selectType('worker')">
+            <div class="tc-icon">👤</div>
+            <div class="tc-title">구직자</div>
+            <div class="tc-desc">일하고 싶어요.<br/>알바·단기 일자리 찾기</div>
+          </div>
+          <div class="type-card" id="type-employer" onclick="selectType('employer')">
+            <div class="tc-icon">🏢</div>
+            <div class="tc-title">사업주</div>
+            <div class="tc-desc">사람을 구해요.<br/>긴급 인력 빠르게 구하기</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" id="btn-type" onclick="nextStep()">다음으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: 휴대폰 인증 ── -->
+    <div class="step" id="step-1">
+      <div class="step-inner">
+        <div style="background:rgba(122,59,255,.08);border:1px solid rgba(122,59,255,.2);border-radius:10px;padding:10px 14px;font-size:.75rem;color:var(--p);margin-bottom:16px;">🛠️ 데모 모드 — 인증 없이 다음으로 넘어갈 수 있어요</div>
+        <div class="step-icon">📱</div>
+        <div class="step-title">휴대폰 번호를<br/>인증해주세요</div>
+        <div class="step-desc">본인 확인을 위해 휴대폰 번호가 필요해요.</div>
+
+        <div class="auth-options">
+          <div class="auth-opt selected" onclick="selectAuth(this,'pass')">
+            <div class="ao-icon">🔐</div>
+            <div class="ao-text"><div class="ao-title">PASS 앱 인증</div><div class="ao-sub">통신사 앱으로 간편 인증</div></div>
+            <div class="ao-check">✓</div>
+          </div>
+          <div class="auth-opt" onclick="selectAuth(this,'sms')">
+            <div class="ao-icon">💬</div>
+            <div class="ao-text"><div class="ao-title">SMS 인증번호</div><div class="ao-sub">문자로 인증번호 받기</div></div>
+            <div class="ao-check"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">휴대폰 번호<span class="req">*</span></label>
+          <div class="form-input-group">
+            <input type="tel" class="form-input" id="phone-input" placeholder="010-0000-0000" oninput="formatPhone(this)"/>
+            <button class="send-btn" id="send-code-btn" onclick="sendCode()">인증번호 발송</button>
+          </div>
+        </div>
+        <div class="form-group" id="code-group" style="display:none">
+          <label class="form-label">인증번호<span class="req">*</span></label>
+          <div class="form-input-group">
+            <input type="text" class="form-input" id="code-input" placeholder="6자리 입력" maxlength="6"/>
+            <button class="send-btn" onclick="verifyCode()">확인</button>
+          </div>
+          <div class="form-hint" id="code-timer">남은 시간: 3:00</div>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" id="btn-phone" onclick="nextStep()">다음으로</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2 (구직자): 기본정보 ── -->
+    <div class="step" id="step-2-worker">
+      <div class="step-inner">
+        <div class="step-icon">👤</div>
+        <div class="step-title">기본 정보를<br/>입력해주세요</div>
+        <div class="step-desc">사업주에게 표시될 정보예요.</div>
+
+        <div style="text-align:center;">
+          <div class="photo-upload" onclick="document.getElementById('photo-input').click()">
+            <div>📷</div>
+            <div class="pu-label">사진 추가</div>
+          </div>
+          <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="previewPhoto(this)"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">이름<span class="req">*</span></label>
+          <input type="text" class="form-input" placeholder="실명 입력"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">생년월일<span class="req">*</span></label>
+          <div class="date-row">
+            <select class="form-select"><option value="">년도</option></select>
+            <select class="form-select"><option value="">월</option></select>
+            <select class="form-select"><option value="">일</option></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">성별</label>
+          <div style="display:flex;gap:8px;">
+            <div class="tag-chip" onclick="toggleSingle(this,'.gender-chip')" style="flex:1;text-align:center;" data-gender="male">남성</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.gender-chip')" style="flex:1;text-align:center;" data-gender="female">여성</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.gender-chip')" style="flex:1;text-align:center;" data-gender="none">선택 안함</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">다음으로</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2 (사업주): 사업자 인증 ── -->
+    <div class="step" id="step-2-employer">
+      <div class="step-inner">
+        <div class="step-icon">🏢</div>
+        <div class="step-title">사업자 인증을<br/>해주세요</div>
+        <div class="step-desc">안전한 거래를 위해 사업자 정보가 필요해요.</div>
+        <div class="form-group">
+          <label class="form-label">사업자등록번호<span class="req">*</span></label>
+          <div class="form-input-group">
+            <input type="text" class="form-input" placeholder="000-00-00000" maxlength="12" oninput="formatBizNum(this)"/>
+            <button class="send-btn" onclick="verifyBiz()">조회</button>
+          </div>
+          <div class="form-hint">국세청 API로 실시간 확인해요</div>
+        </div>
+        <div class="form-group" id="biz-result" style="display:none">
+          <div class="addr-result show" style="background:rgba(34,197,139,.08);border-color:rgba(34,197,139,.3);">
+            ✅ 인증 완료 — <strong id="biz-name">홍길동 개인사업자</strong>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">담당자 이름<span class="req">*</span></label>
+          <input type="text" class="form-input" placeholder="이름 입력"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">담당자 직책</label>
+          <div class="tag-wrap">
+            <div class="tag-chip" onclick="toggleSingle(this,'.role-chip')">사장님</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.role-chip')">채용담당자</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.role-chip')">매니저</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.role-chip')">기타</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">다음으로</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3 (구직자): 지역·희망직종 ── -->
+    <div class="step" id="step-3-worker">
+      <div class="step-inner">
+        <div class="step-icon">📍</div>
+        <div class="step-title">어디서 일하고 싶으세요?</div>
+        <div class="step-desc">희망 지역과 직종을 선택해주세요. 복수 선택 가능해요.</div>
+        <div class="form-group">
+          <label class="form-label">희망 지역<span class="req">*</span></label>
+          <div class="form-input-group">
+            <input type="text" class="form-input" placeholder="예: 강남구, 마포구" id="region-input"/>
+            <button class="send-btn" onclick="addRegion()">추가</button>
+          </div>
+          <div class="tag-wrap" id="region-tags" style="margin-top:8px;"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">희망 직종<span class="req">*</span></label>
+          <div class="tag-wrap">
+            <div class="tag-chip" onclick="toggleTag(this)">🍽️ 홀서빙</div>
+            <div class="tag-chip" onclick="toggleTag(this)">🍳 주방보조</div>
+            <div class="tag-chip" onclick="toggleTag(this)">☕ 카페</div>
+            <div class="tag-chip" onclick="toggleTag(this)">🚴 배달</div>
+            <div class="tag-chip" onclick="toggleTag(this)">🛍️ 매장판매</div>
+            <div class="tag-chip" onclick="toggleTag(this)">📦 물류·배송</div>
+            <div class="tag-chip" onclick="toggleTag(this)">🎤 이벤트·행사</div>
+            <div class="tag-chip" onclick="toggleTag(this)">🎓 교육·튜터</div>
+            <div class="tag-chip" onclick="toggleTag(this)">💼 사무보조</div>
+            <div class="tag-chip" onclick="toggleTag(this)">기타</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">다음으로</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3 (사업주): 매장 기본정보 ── -->
+    <div class="step" id="step-3-employer">
+      <div class="step-inner">
+        <div class="step-icon">🏪</div>
+        <div class="step-title">매장 정보를<br/>알려주세요</div>
+        <div class="step-desc">워커에게 표시될 매장 정보예요.</div>
+        <div class="form-group">
+          <label class="form-label">매장명<span class="req">*</span></label>
+          <input type="text" class="form-input" placeholder="예: 강남 이탈리안 레스토랑"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">업종<span class="req">*</span></label>
+          <div class="biz-grid">
+            <div class="biz-chip" onclick="toggleBiz(this)"><div class="bc-icon">🍽️</div><div class="bc-text">음식점</div></div>
+            <div class="biz-chip" onclick="toggleBiz(this)"><div class="bc-icon">☕</div><div class="bc-text">카페·베이커리</div></div>
+            <div class="biz-chip" onclick="toggleBiz(this)"><div class="bc-icon">🛍️</div><div class="bc-text">리테일·판매</div></div>
+            <div class="biz-chip" onclick="toggleBiz(this)"><div class="bc-icon">📦</div><div class="bc-text">물류·배송</div></div>
+            <div class="biz-chip" onclick="toggleBiz(this)"><div class="bc-icon">🎤</div><div class="bc-text">이벤트·행사</div></div>
+            <div class="biz-chip" onclick="toggleBiz(this)"><div class="bc-icon">💼</div><div class="bc-text">사무·기타</div></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">평균 상시 직원 수</label>
+          <div class="tag-wrap">
+            <div class="tag-chip" onclick="toggleSingle(this,'.emp-chip')">1~2명</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.emp-chip')">3~5명</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.emp-chip')">6~10명</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.emp-chip')">11명 이상</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">다음으로</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4 (구직자): 근무 가능 시간대 ── -->
+    <div class="step" id="step-4-worker">
+      <div class="step-inner">
+        <div class="step-icon">⏰</div>
+        <div class="step-title">언제 일할 수 있어요?</div>
+        <div class="step-desc">근무 가능한 시간대를 선택해주세요. 복수 선택 가능해요.</div>
+        <div class="form-group">
+          <label class="form-label">요일</label>
+          <div class="tag-wrap">
+            <div class="tag-chip" onclick="toggleTag(this)">월</div>
+            <div class="tag-chip" onclick="toggleTag(this)">화</div>
+            <div class="tag-chip" onclick="toggleTag(this)">수</div>
+            <div class="tag-chip" onclick="toggleTag(this)">목</div>
+            <div class="tag-chip" onclick="toggleTag(this)">금</div>
+            <div class="tag-chip" onclick="toggleTag(this)">토</div>
+            <div class="tag-chip" onclick="toggleTag(this)">일</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">시간대</label>
+          <div class="time-grid">
+            <div class="time-chip" onclick="toggleTime(this)"><div class="tc-t">오전</div><div class="tc-s">06:00~12:00</div></div>
+            <div class="time-chip" onclick="toggleTime(this)"><div class="tc-t">오후</div><div class="tc-s">12:00~18:00</div></div>
+            <div class="time-chip" onclick="toggleTime(this)"><div class="tc-t">저녁</div><div class="tc-s">18:00~22:00</div></div>
+            <div class="time-chip" onclick="toggleTime(this)"><div class="tc-t">심야</div><div class="tc-s">22:00~06:00</div></div>
+            <div class="time-chip" onclick="toggleTime(this)"><div class="tc-t">풀타임</div><div class="tc-s">시간 무관</div></div>
+            <div class="time-chip" onclick="toggleTime(this)"><div class="tc-t">협의 가능</div><div class="tc-s">조율 원해요</div></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">희망 시급</label>
+          <div class="tag-wrap">
+            <div class="tag-chip" onclick="toggleSingle(this,'.wage-chip')">최저시급</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.wage-chip')">13,000원~</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.wage-chip')">15,000원~</div>
+            <div class="tag-chip" onclick="toggleSingle(this,'.wage-chip')">협의 가능</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">다음으로</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4 (사업주): 매장 주소 ── -->
+    <div class="step" id="step-4-employer">
+      <div class="step-inner">
+        <div class="step-icon">🗺️</div>
+        <div class="step-title">매장 주소를<br/>알려주세요</div>
+        <div class="step-desc">워커가 찾아올 수 있도록 정확한 주소가 필요해요.</div>
+        <div class="map-tabs">
+          <button class="map-tab on" onclick="switchMap(this,'kakao')">카카오맵</button>
+          <button class="map-tab" onclick="switchMap(this,'naver')">네이버지도</button>
+          <button class="map-tab" onclick="switchMap(this,'google')">구글맵</button>
+        </div>
+        <div class="form-group">
+          <label class="form-label">주소 검색<span class="req">*</span></label>
+          <div class="form-input-group">
+            <input type="text" class="form-input" id="addr-input" placeholder="도로명 또는 건물명으로 검색"/>
+            <button class="send-btn" onclick="searchAddr()">검색</button>
+          </div>
+          <div class="addr-result" id="addr-result">
+            📍 <strong id="addr-text"></strong>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">상세 주소</label>
+          <input type="text" class="form-input" placeholder="예: 2층, B동 101호"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">찾아오는 방법 (선택)</label>
+          <input type="text" class="form-input" placeholder="예: 강남역 3번 출구에서 도보 5분"/>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">다음으로</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 5 (구직자): 경력 확인 ── -->
+    <div class="step" id="step-5-worker">
+      <div class="step-inner">
+        <div class="step-icon">📋</div>
+        <div class="step-title">경력을 확인해요</div>
+        <div class="step-desc">경력이 있으면 매칭 확률이 높아져요. 건너뛸 수 있어요.</div>
+        <div class="career-opts">
+          <div class="career-opt" onclick="selectCareer(this,'insurance')">
+            <div class="co-icon">🏛️</div>
+            <div class="co-text"><div class="co-title">고용보험 이력 연동</div><div class="co-sub">자동으로 근무 경력을 가져와요</div></div>
+            <div class="co-arrow">›</div>
+          </div>
+          <div class="career-opt" onclick="selectCareer(this,'resume')">
+            <div class="co-icon">📄</div>
+            <div class="co-text"><div class="co-title">이력서 업로드</div><div class="co-sub">PDF, Word, JPG 지원</div></div>
+            <div class="co-arrow">›</div>
+          </div>
+          <div class="career-opt" onclick="selectCareer(this,'manual')">
+            <div class="co-icon">✏️</div>
+            <div class="co-text"><div class="co-title">직접 입력</div><div class="co-sub">경력 사항을 직접 작성해요</div></div>
+            <div class="co-arrow">›</div>
+          </div>
+        </div>
+        <div class="or-divider">또는</div>
+        <button class="btn-back" onclick="nextStep()" style="color:var(--muted);">경력 없음 · 건너뛰기</button>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">다음으로</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 5 (사업주): 매장 사진 ── -->
+    <div class="step" id="step-5-employer">
+      <div class="step-inner">
+        <div class="step-icon">📸</div>
+        <div class="step-title">매장 사진을<br/>올려주세요</div>
+        <div class="step-desc">사진이 있으면 워커의 신뢰도가 올라가요. 건너뛸 수 있어요.</div>
+        <div class="upload-area" onclick="document.getElementById('store-photo').click()">
+          <div class="ua-icon">🏪</div>
+          <div class="ua-text">매장 외부/내부 사진 업로드</div>
+          <div class="ua-sub">JPG, PNG · 최대 5장</div>
+        </div>
+        <input type="file" id="store-photo" accept="image/*" multiple style="display:none"/>
+        <div id="photo-preview" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">다음으로</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 6 (구직자 & 사업주): 정산계좌·약관 ── -->
+    <div class="step" id="step-6-worker">
+      <div class="step-inner">
+        <div class="step-icon">💳</div>
+        <div class="step-title">정산 계좌와<br/>약관에 동의해주세요</div>
+        <div class="step-desc">급여를 받을 계좌를 등록해요.</div>
+        <div class="form-group">
+          <label class="form-label">은행 선택<span class="req">*</span></label>
+          <select class="form-select">
+            <option value="">은행을 선택해주세요</option>
+            <option>카카오뱅크</option><option>토스뱅크</option>
+            <option>KB국민은행</option><option>신한은행</option>
+            <option>우리은행</option><option>하나은행</option>
+            <option>NH농협은행</option><option>IBK기업은행</option>
+            <option>케이뱅크</option><option>기타</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">계좌번호<span class="req">*</span></label>
+          <input type="text" class="form-input" placeholder="- 없이 숫자만 입력"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">예금주</label>
+          <input type="text" class="form-input" placeholder="예금주명"/>
+        </div>
+
+        <div style="height:16px;"></div>
+        <div class="terms-list">
+          <div class="term-item term-all" onclick="toggleAll(this)">
+            <div class="term-check" id="check-all"></div>
+            <div class="term-text">전체 동의하기</div>
+          </div>
+          <div class="term-item" onclick="toggleTerm(this,'t1')">
+            <div class="term-check" id="t1"></div>
+            <div class="term-text">[필수] 서비스 이용약관</div>
+            <a href="#" class="term-link" onclick="return false;">보기</a>
+          </div>
+          <div class="term-item" onclick="toggleTerm(this,'t2')">
+            <div class="term-check" id="t2"></div>
+            <div class="term-text">[필수] 개인정보 처리방침</div>
+            <a href="#" class="term-link" onclick="return false;">보기</a>
+          </div>
+          <div class="term-item" onclick="toggleTerm(this,'t3')">
+            <div class="term-check" id="t3"></div>
+            <div class="term-text">[필수] 전자금융거래 이용약관</div>
+            <a href="#" class="term-link" onclick="return false;">보기</a>
+          </div>
+          <div class="term-item" onclick="toggleTerm(this,'t4')">
+            <div class="term-check" id="t4"></div>
+            <div class="term-text">[선택] 마케팅 정보 수신 동의</div>
+            <a href="#" class="term-link" onclick="return false;">보기</a>
+          </div>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">가입 완료하기</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <div class="step" id="step-6-employer">
+      <div class="step-inner">
+        <div class="step-icon">💳</div>
+        <div class="step-title">정산 계좌와<br/>약관에 동의해주세요</div>
+        <div class="step-desc">급여 지급에 사용할 계좌를 등록해요.</div>
+        <div class="form-group">
+          <label class="form-label">은행 선택<span class="req">*</span></label>
+          <select class="form-select">
+            <option value="">은행을 선택해주세요</option>
+            <option>카카오뱅크</option><option>토스뱅크</option>
+            <option>KB국민은행</option><option>신한은행</option>
+            <option>우리은행</option><option>하나은행</option>
+            <option>NH농협은행</option><option>기타</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">계좌번호<span class="req">*</span></label>
+          <input type="text" class="form-input" placeholder="- 없이 숫자만 입력"/>
+        </div>
+        <div style="height:16px;"></div>
+        <div class="terms-list">
+          <div class="term-item term-all" onclick="toggleAll(this)">
+            <div class="term-check" id="check-all-e"></div>
+            <div class="term-text">전체 동의하기</div>
+          </div>
+          <div class="term-item" onclick="toggleTerm(this,'e1')">
+            <div class="term-check" id="e1"></div>
+            <div class="term-text">[필수] 서비스 이용약관</div>
+            <a href="#" class="term-link" onclick="return false;">보기</a>
+          </div>
+          <div class="term-item" onclick="toggleTerm(this,'e2')">
+            <div class="term-check" id="e2"></div>
+            <div class="term-text">[필수] 개인정보 처리방침</div>
+            <a href="#" class="term-link" onclick="return false;">보기</a>
+          </div>
+          <div class="term-item" onclick="toggleTerm(this,'e3')">
+            <div class="term-check" id="e3"></div>
+            <div class="term-text">[필수] 사업자 서비스 약관</div>
+            <a href="#" class="term-link" onclick="return false;">보기</a>
+          </div>
+          <div class="term-item" onclick="toggleTerm(this,'e4')">
+            <div class="term-check" id="e4"></div>
+            <div class="term-text">[선택] 마케팅 정보 수신 동의</div>
+            <a href="#" class="term-link" onclick="return false;">보기</a>
+          </div>
+        </div>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn-next" onclick="nextStep()">가입 완료하기</button>
+        <button class="btn-back" onclick="prevStep()">이전으로</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 7: 가입 완료 ── -->
+    <div class="step" id="step-7">
+      <div class="complete-screen">
+        <div class="complete-icon">🎉</div>
+        <div class="complete-title" id="complete-title">가입 완료!</div>
+        <div class="complete-desc" id="complete-desc">OJOb 회원이 되셨어요.<br/>지금 바로 시작해볼까요?</div>
+        <div class="complete-card" id="complete-card"></div>
+        <a href="index.html" class="btn-primary-full" id="complete-btn">🚀 시작하기</a>
+      </div>
+    </div>
+
+  </div><!-- /signup-card -->
+</main>
+
+<script>
+// ── STATE ──
+let userType = null; // 'worker' | 'employer'
+let currentStep = 0;
+let phoneVerified = false;
+let timerInterval = null;
+
+// Step flow per type
+const workerSteps = [0, 1, '2-worker', '3-worker', '4-worker', '5-worker', '6-worker', 7];
+const employerSteps = [0, 1, '2-employer', '3-employer', '4-employer', '5-employer', '6-employer', 7];
+
+const stepLabels = {
+  worker: ['유형 선택','휴대폰 인증','기본 정보','지역·직종','근무 시간대','경력 확인','정산·약관','완료'],
+  employer: ['유형 선택','휴대폰 인증','사업자 인증','매장 정보','매장 주소','매장 사진','정산·약관','완료']
+};
+
+function getSteps() { return userType === 'employer' ? employerSteps : workerSteps; }
+
+function showStep(idx) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const steps = getSteps();
+  const stepId = 'step-' + steps[idx];
+  document.getElementById(stepId).classList.add('active');
+
+  // Progress
+  const total = steps.length - 1;
+  const pct = idx === 0 ? 0 : (idx / total * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+
+  const labels = stepLabels[userType] || stepLabels.worker;
+  document.getElementById('step-label').textContent = labels[idx] || '';
+  document.getElementById('step-counter').textContent = idx > 0 && idx < total ? `${idx} / ${total - 1}` : '';
+
+  // Complete screen
+  if (idx === total) setupComplete();
+}
+
+function nextStep() {
+  const steps = getSteps();
+  if (currentStep < steps.length - 1) {
+    currentStep++;
+    showStep(currentStep);
+    window.scrollTo(0,0);
+  }
+}
+function prevStep() {
+  if (currentStep > 0) {
+    currentStep--;
+    showStep(currentStep);
+    window.scrollTo(0,0);
+  }
+}
+
+// ── TYPE SELECT ──
+function selectType(type) {
+  userType = type;
+  document.getElementById('type-worker').classList.toggle('selected', type === 'worker');
+  document.getElementById('type-employer').classList.toggle('selected', type === 'employer');
+  document.getElementById('btn-type').disabled = false;
+}
+
+// ── PHONE ──
+function formatPhone(input) {
+  let v = input.value.replace(/\D/g,'');
+  if (v.length > 3 && v.length <= 7) v = v.slice(0,3)+'-'+v.slice(3);
+  else if (v.length > 7) v = v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7,11);
+  input.value = v;
+}
+
+function selectAuth(el, type) {
+  document.querySelectorAll('.auth-opt').forEach(a => {
+    a.classList.remove('selected');
+    a.querySelector('.ao-check').textContent = '';
+  });
+  el.classList.add('selected');
+  el.querySelector('.ao-check').textContent = '✓';
+}
+
+let countdown = 180;
+function sendCode() {
+  document.getElementById('code-group').style.display = 'block';
+  document.getElementById('send-code-btn').textContent = '재발송';
+  startTimer();
+}
+
+function startTimer() {
+  countdown = 180;
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    countdown--;
+    const m = Math.floor(countdown/60);
+    const s = countdown % 60;
+    document.getElementById('code-timer').textContent = `남은 시간: ${m}:${s.toString().padStart(2,'0')}`;
+    if (countdown <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById('send-code-btn').disabled = false;
+    }
+  }, 1000);
+}
+
+function verifyCode() {
+  phoneVerified = true;
+  document.getElementById('code-timer').textContent = '✅ 인증 완료! (데모 모드)';
+  document.getElementById('code-timer').style.color = 'var(--g)';
+  clearInterval(timerInterval);
+}
+
+// ── CHIPS / TAGS ──
+function toggleTag(el) { el.classList.toggle('on'); }
+function toggleTime(el) { el.classList.toggle('on'); }
+function toggleBiz(el) {
+  document.querySelectorAll('.biz-chip').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+}
+function toggleSingle(el, selector) {
+  document.querySelectorAll(selector).forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// ── REGION TAGS ──
+function addRegion() {
+  const input = document.getElementById('region-input');
+  const val = input.value.trim();
+  if (!val) return;
+  const wrap = document.getElementById('region-tags');
+  const chip = document.createElement('div');
+  chip.className = 'tag-chip on';
+  chip.style.cssText = 'display:flex;align-items:center;gap:6px;';
+  chip.innerHTML = val + ' <span onclick="this.parentElement.remove()" style="cursor:pointer;font-size:.8rem;opacity:.7;">×</span>';
+  wrap.appendChild(chip);
+  input.value = '';
+}
+
+// ── MAP ──
+function switchMap(el, provider) {
+  document.querySelectorAll('.map-tab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+}
+function searchAddr() {
+  const q = document.getElementById('addr-input').value;
+  if (!q) return;
+  document.getElementById('addr-text').textContent = q + ' (검색 결과)';
+  document.getElementById('addr-result').classList.add('show');
+}
+
+// ── BIZ VERIFY ──
+function formatBizNum(input) {
+  let v = input.value.replace(/\D/g,'');
+  if (v.length > 3 && v.length <= 5) v = v.slice(0,3)+'-'+v.slice(3);
+  else if (v.length > 5) v = v.slice(0,3)+'-'+v.slice(3,5)+'-'+v.slice(5,10);
+  input.value = v;
+}
+function verifyBiz() {
+  document.getElementById('biz-result').style.display = 'block';
+  document.getElementById('biz-name').textContent = '㈜ 씨드 아카이브 (정상 사업자)';
+}
+
+// ── CAREER ──
+function selectCareer(el, type) {
+  document.querySelectorAll('.career-opt').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ── PHOTO ──
+function previewPhoto(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const pu = document.querySelector('.photo-upload');
+      pu.style.backgroundImage = `url(${e.target.result})`;
+      pu.style.backgroundSize = 'cover';
+      pu.style.backgroundPosition = 'center';
+      pu.innerHTML = '';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+// ── TERMS ──
+const requiredTerms = ['t1','t2','t3','e1','e2','e3'];
+function toggleTerm(el, id) {
+  const check = document.getElementById(id);
+  const isChecked = check.classList.contains('checked');
+  check.classList.toggle('checked', !isChecked);
+  check.textContent = !isChecked ? '✓' : '';
+}
+function toggleAll(el) {
+  const wrap = el.closest('.terms-list');
+  const allChecks = wrap.querySelectorAll('.term-check:not(#check-all):not(#check-all-e)');
+  const allId = el.querySelector('.term-check').id;
+  const allCheck = document.getElementById(allId);
+  const nowOn = !allCheck.classList.contains('checked');
+  allCheck.classList.toggle('checked', nowOn);
+  allCheck.textContent = nowOn ? '✓' : '';
+  allChecks.forEach(c => {
+    c.classList.toggle('checked', nowOn);
+    c.textContent = nowOn ? '✓' : '';
+  });
+}
+
+// ── COMPLETE ──
+function setupComplete() {
+  const isWorker = userType === 'worker';
+  document.getElementById('complete-title').textContent = isWorker ? '가입 완료! 🎉' : '매장 등록 완료! 🎉';
+  document.getElementById('complete-desc').textContent = isWorker
+    ? '이제 내 주변 알바를 찾아볼 수 있어요.\n일한 만큼, 경력이 되도록.'
+    : '이제 긴급 공고를 올려볼 수 있어요.\n평균 12분 안에 매칭됩니다.';
+  document.getElementById('complete-btn').textContent = isWorker ? '🔍 알바 찾으러 가기' : '🚨 첫 공고 올리기';
+
+  const card = document.getElementById('complete-card');
+  card.innerHTML = isWorker ? `
+    <div class="cc-row"><span class="cc-k">역할</span><span class="cc-v">👤 구직자 (워커)</span></div>
+    <div class="cc-row"><span class="cc-k">포트폴리오</span><span class="cc-v">ojob.kr/p/내핸들</span></div>
+    <div class="cc-row"><span class="cc-k">첫 알바 매칭</span><span class="cc-v">지금 바로 가능 ✅</span></div>
+  ` : `
+    <div class="cc-row"><span class="cc-k">역할</span><span class="cc-v">🏢 사업주</span></div>
+    <div class="cc-row"><span class="cc-k">공고 등록</span><span class="cc-v">지금 바로 가능 ✅</span></div>
+    <div class="cc-row"><span class="cc-k">평균 매칭 시간</span><span class="cc-v">12분 이내 ⚡</span></div>
+  `;
+}
+
+// ── INIT ──
+showStep(0);
+
+// ── URL 파라미터로 유형 자동 선택 ──
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get('type');
+  if (type === 'worker' || type === 'employer') {
+    selectType(type);
+    // 바로 다음 단계로 (선택 건너뛰기)
+    setTimeout(() => { nextStep(); }, 300);
+  }
+})();
+
+</script>
+</body>
+</html>
