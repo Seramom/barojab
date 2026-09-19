@@ -1017,20 +1017,105 @@ function toggleAll(el) {
   });
 }
 
+// ── 데이터 수집 함수 ──
+function collectWorkerData() {
+  // 이름
+  const nameInput = document.querySelector('#step-2-worker input[placeholder="실명 입력"]');
+  // 생년월일
+  const selects = document.querySelectorAll('#step-2-worker select');
+  const year = selects[0]?.value || '';
+  const month = selects[1]?.value || '';
+  const day = selects[2]?.value || '';
+  // 성별
+  const genderEl = document.querySelector('#step-2-worker .tag-chip.on');
+  // 지역
+  const regionTags = [...document.querySelectorAll('#region-tags .tag-chip')].map(t => t.textContent.replace('×','').trim());
+  // 희망직종
+  const jobTypes = [...document.querySelectorAll('#step-3-worker .tag-wrap .tag-chip.on')].map(t => t.textContent.trim());
+  // 요일
+  const days = [...document.querySelectorAll('#step-4-worker .tag-wrap .tag-chip.on')].map(t => t.textContent.trim());
+  // 시간대
+  const times = [...document.querySelectorAll('.time-chip.on')].map(t => t.querySelector('.tc-t')?.textContent.trim());
+  // 희망시급
+  const wageEl = document.querySelector('#step-4-worker .tag-chip.on[onclick*="wage"]') ||
+                 [...document.querySelectorAll('#step-4-worker .tag-wrap')].pop()?.querySelector('.tag-chip.on');
+  // 경력
+  const careerEl = document.querySelector('.career-opt.selected .co-title');
+  // 은행/계좌
+  const bankSelect = document.querySelector('#step-6-worker select');
+  const accountInput = document.querySelector('#step-6-worker input[placeholder="- 없이 숫자만 입력"]');
+  const holderInput = document.querySelector('#step-6-worker input[placeholder="예금주명"]');
+
+  return {
+    type: 'worker',
+    phone: document.getElementById('phone-input')?.value || '',
+    name: nameInput?.value || '',
+    birthYear: year, birthMonth: month, birthDay: day,
+    gender: genderEl?.textContent?.trim() || '',
+    regions: regionTags,
+    jobTypes: jobTypes,
+    availableDays: days,
+    availableTimes: times,
+    desiredWage: wageEl?.textContent?.trim() || '',
+    careerMethod: careerEl?.textContent?.trim() || '',
+    bankName: bankSelect?.value || '',
+    accountNumber: accountInput?.value || '',
+    accountHolder: holderInput?.value || '',
+    source: 'web-signup',
+    registeredAt: new Date().toISOString()
+  };
+}
+
+function collectEmployerData() {
+  // 사업자번호
+  const bizInput = document.querySelector('#step-2-employer input[placeholder="000-00-00000"]');
+  // 담당자
+  const managerInput = document.querySelector('#step-2-employer input[placeholder="이름 입력"]');
+  // 직책
+  const roleEl = document.querySelector('#step-2-employer .tag-chip.on');
+  // 매장명
+  const storeInput = document.querySelector('#step-3-employer input[placeholder="예: 강남 이탈리안 레스토랑"]');
+  // 업종
+  const bizTypeEl = document.querySelector('.biz-chip.on .bc-text');
+  // 직원수
+  const empEl = document.querySelector('#step-3-employer .tag-wrap .tag-chip.on');
+  // 주소
+  const addrText = document.getElementById('addr-text')?.textContent || '';
+  const addrDetail = document.querySelector('#step-4-employer input[placeholder="예: 2층, B동 101호"]');
+  const addrGuide = document.querySelector('#step-4-employer input[placeholder="예: 강남역 3번 출구에서 도보 5분"]');
+  // 은행/계좌
+  const bankSelect = document.querySelector('#step-6-employer select');
+  const accountInput = document.querySelector('#step-6-employer input[placeholder="- 없이 숫자만 입력"]');
+
+  return {
+    type: 'employer',
+    phone: document.getElementById('phone-input')?.value || '',
+    bizNumber: bizInput?.value || '',
+    managerName: managerInput?.value || '',
+    managerRole: roleEl?.textContent?.trim() || '',
+    storeName: storeInput?.value || '',
+    bizType: bizTypeEl?.textContent?.trim() || '',
+    employeeCount: empEl?.textContent?.trim() || '',
+    address: addrText,
+    addressDetail: addrDetail?.value || '',
+    addressGuide: addrGuide?.value || '',
+    bankName: bankSelect?.value || '',
+    accountNumber: accountInput?.value || '',
+    source: 'web-signup',
+    registeredAt: new Date().toISOString()
+  };
+}
+
 // ── COMPLETE ──
 async function setupComplete() {
   const isWorker = userType === 'worker';
 
-  // Firebase 저장
-  const userData = {
-    type: userType,
-    phone: document.getElementById('phone-input')?.value || '',
-    source: 'web-signup',
-    registeredAt: new Date().toISOString()
-  };
+  // 전체 데이터 수집 후 Firebase 저장
+  const userData = isWorker ? collectWorkerData() : collectEmployerData();
+  console.log('저장할 데이터:', userData);
   if (window.saveToFirebase) {
     const ok = await window.saveToFirebase(userData);
-    if (ok) console.log('가입 데이터 저장 완료');
+    if (ok) console.log('✅ 가입 데이터 저장 완료');
   }
   document.getElementById('complete-title').textContent = isWorker ? '가입 완료! 🎉' : '매장 등록 완료! 🎉';
   document.getElementById('complete-desc').textContent = isWorker
