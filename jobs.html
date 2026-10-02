@@ -109,12 +109,24 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 3
 @keyframes popIn{0%{transform:scale(0);}100%{transform:scale(1);}}
 
 @media(max-width:768px){
-  nav{padding:12px 16px;}
+  nav{padding:10px 16px;}
+  .nav-r a:not(.nav-cta){display:none;}
   .search-wrap{padding:10px 16px;}
-  .filter-wrap{padding:8px 16px;}
+  .filter-wrap{padding:8px 16px;gap:6px;}
+  .filter-chip{font-size:.78rem;padding:6px 12px;}
   .layout{grid-template-columns:1fr;}
   .sidebar{display:none;}
-  .job-list{padding:16px;}
+  .job-list{padding:12px;}
+  .job-card{padding:14px;}
+  .job-title{font-size:.95rem;}
+  .job-meta{font-size:.78rem;flex-wrap:wrap;gap:6px;}
+  .job-pay{font-size:1rem;}
+  .job-tags{flex-wrap:wrap;gap:6px;}
+  .search-input{font-size:16px!important;} /* iOS zoom 방지 */
+}
+@media(max-width:420px){
+  .filter-wrap{overflow-x:auto;flex-wrap:nowrap;padding-bottom:10px;}
+  .filter-chip{white-space:nowrap;flex-shrink:0;}
 }
 </style>
 </head>
