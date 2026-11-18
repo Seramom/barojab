@@ -134,9 +134,11 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
 @media(max-width:360px){
   .check-grid{grid-template-columns:1fr!important;}
 }
+body{word-break:keep-all;}
 </style>
 </head>
 <body>
+<div style="background:#FFF3DC;color:#8A4B00;text-align:center;font-size:.8rem;font-weight:700;padding:8px 16px;line-height:1.5;">데모 화면이에요 · 표시된 내용은 실제 데이터가 아니며, 기능은 준비 중이에요</div>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -153,7 +155,7 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
   <div class="page-header">
     <div class="page-badge">🚨 사업주 전용</div>
     <div class="page-title">긴급 공고 등록</div>
-    <div class="page-sub">3분이면 공고가 올라가요. 평균 12분 안에 매칭됩니다.</div>
+    <div class="page-sub">공고 등록은 무료예요. 등록 기능은 준비 중이라 지금은 미리보기만 할 수 있어요.</div>
   </div>
 
   <!-- Progress nav -->
@@ -189,7 +191,7 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
           <div class="urgency-opt on" onclick="selectUrgency(this,'today')">
             <div class="uo-icon">🔴</div>
             <div class="uo-title">오늘 당장</div>
-            <div class="uo-sub">즉시 매칭 알림</div>
+            <div class="uo-sub">긴급 공고</div>
           </div>
           <div class="urgency-opt" onclick="selectUrgency(this,'tomorrow')">
             <div class="uo-icon">🟡</div>
@@ -237,13 +239,13 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
     <div class="section-card active">
       <div class="section-title"><span class="st-icon">💰</span>급여 설정</div>
       <div class="form-group">
-        <label class="form-label">시급<span class="req">*</span><span class="hint">2025년 최저시급 10,030원</span></label>
+        <label class="form-label">시급<span class="req">*</span><span class="hint">2026년 최저시급 10,320원</span></label>
         <div class="pay-wrap">
           <input type="number" class="form-input" id="hourly-pay" placeholder="13,000" value="13600"/>
           <div class="pay-unit">원 / 시간</div>
         </div>
         <div class="pay-presets">
-          <div class="pay-preset" onclick="setPay(10030)">최저 10,030</div>
+          <div class="pay-preset" onclick="setPay(10320)">최저 10,320</div>
           <div class="pay-preset" onclick="setPay(12000)">12,000</div>
           <div class="pay-preset" onclick="setPay(13600)">13,600</div>
           <div class="pay-preset" onclick="setPay(15000)">15,000</div>
@@ -255,10 +257,7 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
           <span style="color:var(--muted);">예상 총 급여 (5시간)</span>
           <span style="font-weight:800;color:var(--p);" id="total-pay">₩68,000</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:.75rem;margin-top:4px;">
-          <span style="color:var(--muted);">플랫폼 수수료 (10%)</span>
-          <span style="color:var(--muted);" id="fee-pay">₩6,800</span>
-        </div>
+        <div style="font-size:.75rem;margin-top:4px;color:var(--muted);">공고 등록은 무료예요. 급여는 사장님이 워커에게 직접 지급해요.</div>
       </div>
     </div>
 
@@ -278,14 +277,6 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
           <div class="tag-chip" onclick="toggleTag(this)">운전 가능</div>
           <div class="tag-chip" onclick="toggleTag(this)">외국어 가능</div>
           <div class="tag-chip on" onclick="toggleTag(this)">경력 무관</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">선호 성별</label>
-        <div class="tag-wrap">
-          <div class="tag-chip on" onclick="selectGender(this)">무관</div>
-          <div class="tag-chip" onclick="selectGender(this)">남성 선호</div>
-          <div class="tag-chip" onclick="selectGender(this)">여성 선호</div>
         </div>
       </div>
     </div>
@@ -317,7 +308,7 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
       </div>
       <div class="form-group">
         <label class="form-label">추가 안내 사항 (선택)</label>
-        <textarea class="form-textarea" placeholder="예: 식사 제공, 주차비 지원, 노쇼 시 패널티 있음" style="min-height:70px;"></textarea>
+        <textarea class="form-textarea" placeholder="예: 식사 제공, 주차비 지원" style="min-height:70px;"></textarea>
       </div>
     </div>
     <div class="btn-wrap">
@@ -339,7 +330,7 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
         <div class="pj-meta" id="preview-meta">📍 강남구 역삼동 · 오늘 17:00~22:00</div>
         <div class="pj-bottom">
           <span class="pj-pay" id="preview-pay">₩68,000</span>
-          <span class="pj-time">5시간 · 당일정산</span>
+          <span class="pj-time">5시간</span>
         </div>
       </div>
     </div>
@@ -366,12 +357,12 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
     </div>
 
     <div style="background:rgba(34,197,139,.08);border:1.5px solid rgba(34,197,139,.2);border-radius:14px;padding:14px;margin-bottom:16px;font-size:.85rem;color:var(--txt-sub);line-height:1.6;">
-      ⚡ 공고 등록 후 <strong>반경 3km 내 워커</strong>에게 즉시 푸시 알림이 전송됩니다.<br/>
-      평균 <strong>12분 이내</strong>에 지원자가 나타나요.
+      공고가 등록되면 근무 시간·거리·경력·스킬을 비교해 조건이 맞는 워커와 <strong>매칭 적합도</strong>를 보여드려요. (준비 중)<br/>
+      매칭 적합도는 채용 성공 확률이 아니에요.
     </div>
 
     <div class="btn-wrap">
-      <button class="btn-main" onclick="submitJob()">🚨 지금 바로 공고 올리기</button>
+      <button class="btn-main" onclick="submitJob()">공고 올리기</button>
       <button class="btn-sub" onclick="goStep(3)">← 이전으로</button>
     </div>
   </div>
@@ -380,15 +371,11 @@ main{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
 <!-- Success Modal -->
 <div class="modal-overlay" id="success-modal">
   <div class="modal">
-    <div class="modal-icon">🎉</div>
-    <div class="modal-title">공고가 올라갔어요!</div>
-    <div class="modal-sub">근처 워커들에게 알림을 보내고 있어요.<br/>지원자가 오면 바로 알려드릴게요.</div>
-    <div class="modal-stats">
-      <div class="ms-item"><div class="ms-n" id="match-count">0</div><div class="ms-l">주변 가용 워커</div></div>
-      <div class="ms-item"><div class="ms-n">12분</div><div class="ms-l">평균 매칭 시간</div></div>
-    </div>
-    <button class="modal-btn" onclick="window.location.href='index.html'">홈으로 이동</button>
-    <button class="modal-btn-sub" onclick="closeModal()">공고 목록 보기</button>
+    <div class="modal-icon">🛠️</div>
+    <div class="modal-title">공고 등록 기능은 준비 중이에요</div>
+    <div class="modal-sub">출시되면 사장님 계정으로 바로 공고를 올릴 수 있어요.<br/>먼저 회원가입을 해두시면 가장 먼저 알려드릴게요.</div>
+    <button class="modal-btn" onclick="window.location.href='signup.html?type=employer'">사장님으로 회원가입</button>
+    <button class="modal-btn-sub" onclick="closeModal()">닫기</button>
   </div>
 </div>
 
@@ -450,7 +437,7 @@ function updatePay() {
   const total = pay * hours;
   const fee = Math.round(total * 0.1);
   document.getElementById('total-pay').textContent = '₩' + total.toLocaleString();
-  document.getElementById('fee-pay').textContent = '₩' + fee.toLocaleString();
+  const feeEl = document.getElementById('fee-pay'); if (feeEl) feeEl.textContent = '₩' + fee.toLocaleString();
   document.getElementById('preview-pay').textContent = '₩' + total.toLocaleString();
 }
 
@@ -475,13 +462,6 @@ document.getElementById('end-time')?.addEventListener('change', updateDuration);
 function submitJob() {
   const modal = document.getElementById('success-modal');
   modal.classList.add('show');
-  let count = 0;
-  const target = Math.floor(Math.random() * 15) + 8;
-  const counter = setInterval(() => {
-    count++;
-    document.getElementById('match-count').textContent = count;
-    if (count >= target) clearInterval(counter);
-  }, 80);
 }
 function closeModal() {
   document.getElementById('success-modal').classList.remove('show');
