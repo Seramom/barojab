@@ -73,6 +73,7 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
   .bottom-links{flex-direction:column;gap:8px;}
   .bottom-links .sep{display:none;}
 }
+body{word-break:keep-all;}
 </style>
 </head>
 <body>
@@ -92,6 +93,7 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
     </div>
     <div class="card-title">다시 만나요 👋</div>
     <div class="card-sub">로그인하고 오늘의 일자리를 찾아보세요</div>
+    <div style="background:#FFF3DC;color:#8A4B00;border-radius:12px;padding:12px 14px;font-size:.82rem;font-weight:600;line-height:1.55;margin-bottom:18px;">로그인 기능은 준비 중이에요. 회원가입하신 분께는 출시되면 가장 먼저 알려드릴게요.</div>
 
     <div class="type-toggle">
       <button class="type-btn on" onclick="setType(this,'worker')">👤 구직자</button>
@@ -128,10 +130,10 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
 
     <button class="btn-main" onclick="doLogin()">로그인</button>
 
-    <div class="divider">또는 소셜 로그인</div>
+    <div class="divider">또는 소셜 로그인 (준비 중)</div>
     <div class="social-btns">
-      <button class="social-btn"><span class="sb-icon">💛</span> 카카오로 계속하기</button>
-      <button class="social-btn"><span class="sb-icon">🟢</span> 네이버로 계속하기</button>
+      <button class="social-btn" onclick="alertBox()"><span class="sb-icon">💛</span> 카카오로 계속하기</button>
+      <button class="social-btn" onclick="alertBox()"><span class="sb-icon">🟢</span> 네이버로 계속하기</button>
     </div>
 
     <div class="bottom-links">
@@ -178,8 +180,17 @@ function sendCode() {
   }, 1000);
 }
 function doLogin() {
-  // MVP: 바로 메인으로
-  window.location.href = 'index.html';
+  alertBox();
+}
+function alertBox() {
+  let t = document.getElementById('login-toast');
+  if (!t) {
+    t = document.createElement('div'); t.id = 'login-toast';
+    t.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#1E1B2E;color:#fff;padding:12px 20px;border-radius:100px;font-size:.85rem;font-weight:600;z-index:999;white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = '로그인 기능은 준비 중이에요';
+  clearTimeout(t._h); t._h = setTimeout(() => t.remove(), 2500);
 }
 </script>
 </body>
