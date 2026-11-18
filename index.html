@@ -4,9 +4,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>OJOb — 알바는 왜 레퍼첵이 없나요?</title>
-<meta property="og:title" content="OJOb — 일한 만큼, 경력이 되도록."/>
-<meta property="og:description" content="알바는 왜 레퍼첵이 없나요? 일한 만큼 경력이 쌓이는 단기 알바 매칭 플랫폼."/>
+<title>OJOb — 일이 필요할 때, 사람이 필요할 때.</title>
+<meta property="og:title" content="OJOb — 일이 필요할 때, 사람이 필요할 때."/>
+<meta property="og:description" content="가까운 일자리부터 경험이 확인된 워커까지. 지역 기반 단기 구인·구직 정보 플랫폼 OJOb."/>
 <style>
 :root {
   --p: #7A3BFF;
@@ -668,6 +668,87 @@ section{padding:90px 48px;}
   .phone{width:230px;height:420px;}
   .stats-row{flex-direction:column;align-items:flex-start;gap:14px;}
 }
+
+/* ── 2026.11 RENEWAL ── */
+body{word-break:keep-all;}
+.nav-r a.dl-btn,.mobile-menu a.dl-btn{color:#fff;}
+.route-cards{display:flex;flex-direction:column;gap:16px;width:min(380px,100%);}
+.route-card{display:block;text-decoration:none;border-radius:24px;padding:28px;transition:transform .2s,box-shadow .2s;}
+.route-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(122,59,255,.18);}
+.route-card .rc-k{font-size:.8rem;font-weight:700;margin-bottom:8px;}
+.route-card .rc-h{font-size:1.35rem;font-weight:900;line-height:1.35;margin-bottom:14px;}
+.route-card .rc-go{font-size:.92rem;font-weight:700;}
+.rc-worker{background:var(--p);color:#fff;}
+.rc-worker .rc-k{color:rgba(255,255,255,.75);}
+.rc-owner{background:var(--charcoal);color:#fff;}
+.rc-owner .rc-k,.rc-owner .rc-go{color:var(--lilac);}
+
+.tag-soon{display:inline-block;font-size:.68rem;font-weight:700;color:var(--p2);background:var(--misty);border:1px solid var(--lilac);border-radius:100px;padding:2px 9px;margin-left:6px;vertical-align:middle;}
+.fnum{font-size:.85rem;font-weight:900;color:var(--p);margin-bottom:10px;}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.chk-list{list-style:none;margin:0 0 32px;display:flex;flex-direction:column;gap:10px;}
+.chk-list li{display:flex;gap:10px;align-items:flex-start;font-size:.95rem;color:var(--txt);}
+.chk-list li::before{content:'';flex-shrink:0;width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--misty) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A3BFF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/11px no-repeat;}
+
+.info-card{background:var(--card-bg);border:1.5px solid rgba(122,59,255,.1);border-radius:24px;padding:28px;box-shadow:0 8px 32px rgba(122,59,255,.08);}
+.info-card .ic-t{font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:16px;}
+.verif-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);font-size:.9rem;}
+.verif-row:last-child{border-bottom:none;}
+.vb{font-size:.72rem;font-weight:700;border-radius:100px;padding:3px 10px;white-space:nowrap;}
+.vb-self{background:#F1F0F5;color:#5B5670;}
+.vb-doc{background:var(--misty);color:var(--p2);}
+.vb-hire{background:#E7DAFF;color:#4A1AA8;}
+.vb-work{background:var(--p);color:#fff;}
+.grade-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.grade-chip{font-size:.75rem;font-weight:700;border-radius:10px;padding:6px 12px;border:1.5px solid var(--lilac);color:var(--p2);background:#fff;}
+
+.demo-badge{display:inline-block;font-size:.7rem;font-weight:700;color:#8A4B00;background:#FFF3DC;border-radius:6px;padding:3px 8px;margin-bottom:14px;}
+.match-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.match-name{font-size:1.1rem;font-weight:900;}
+.match-score{font-size:1.9rem;font-weight:900;color:var(--p);}
+.match-score small{display:block;font-size:.7rem;font-weight:600;color:var(--muted);text-align:right;}
+.match-note{font-size:.82rem;color:var(--txt-sub);margin-top:16px;background:var(--cloud);border-radius:12px;padding:12px 14px;}
+
+#pool{background:var(--charcoal);color:#fff;text-align:center;}
+#pool .sec-h{color:#fff;}
+#pool .sec-p{color:rgba(255,255,255,.72);margin:0 auto 32px;}
+.btn-soon{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:14px 28px;border-radius:14px;font-weight:700;font-size:1rem;text-decoration:none;}
+
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.price-card{background:var(--card-bg);border:1.5px solid rgba(122,59,255,.1);border-radius:24px;padding:30px;}
+.price-card h3{font-size:1.1rem;font-weight:900;margin-bottom:6px;}
+.price-card .pr{font-size:1.5rem;font-weight:900;color:var(--p);margin-bottom:18px;}
+.price-card .pr.tbd{font-size:1rem;color:var(--muted);}
+.price-card .chk-list{margin:0;}
+.price-card.hl{border-color:var(--p);}
+.fine{font-size:.8rem;color:var(--muted);margin-top:20px;}
+
+.faq{max-width:760px;}
+.faq details{border-bottom:1px solid var(--border);padding:18px 0;}
+.faq summary{cursor:pointer;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;gap:16px;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:'+';color:var(--p);font-weight:900;}
+.faq details[open] summary::after{content:'−';}
+.faq details p{margin-top:10px;color:var(--txt-sub);font-size:.93rem;}
+
+.flow-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.flow{background:var(--card-bg);border-radius:24px;padding:28px;border:1.5px solid rgba(122,59,255,.08);}
+.flow h3{font-size:1rem;font-weight:900;margin-bottom:16px;}
+.flow ol{list-style:none;counter-reset:f;display:flex;flex-direction:column;gap:10px;}
+.flow li{counter-increment:f;display:flex;gap:12px;align-items:center;font-size:.95rem;}
+.flow li::before{content:counter(f);width:26px;height:26px;border-radius:50%;background:var(--misty);color:var(--p);font-weight:900;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+@media(max-width:768px){
+  .split,.flow-wrap{grid-template-columns:1fr;gap:28px;}
+  .grid4{grid-template-columns:1fr;}
+  .route-cards{width:100%;}
+  .hero-visual{align-items:stretch;}
+  .match-score{font-size:1.6rem;}
+  .hero .hero-btns{display:none;}
+  #worker .split > .info-card{order:2;}
+}
 </style>
 </head>
 <body>
@@ -676,12 +757,13 @@ section{padding:90px 48px;}
 <nav id="nav">
   <a href="#" style="display:flex;align-items:center;gap:10px;text-decoration:none;"><img src="OJOb_logo.png" alt="OJOb" style="height:32px;object-fit:contain;"/></a>
   <div class="nav-r">
-    <a href="#campaign">왜 OJOb?</a>
-    <a href="jobs.html">알바 찾기</a>
-    <a href="post-job.html">공고 등록</a>
-    <a href="portfolio.html">포트폴리오</a>
+    <a href="#why">OJOb 소개</a>
+    <a href="#worker">일자리 찾기</a>
+    <a href="#owner">워커 찾기</a>
+    <a href="#how">이용 방법</a>
+    <a href="#pricing">요금 안내</a>
     <a href="login.html">로그인</a>
-    <a href="signup.html" class="dl-btn">무료로 시작하기</a>
+    <a href="signup.html" class="dl-btn">회원가입</a>
   </div>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="메뉴">
     <span></span><span></span><span></span>
@@ -689,411 +771,191 @@ section{padding:90px 48px;}
 </nav>
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#campaign" onclick="toggleMenu()">왜 OJOb?</a>
-  <a href="jobs.html">알바 찾기</a>
-  <a href="post-job.html">공고 등록</a>
-  <a href="portfolio.html">포트폴리오</a>
+  <a href="#why" onclick="toggleMenu()">OJOb 소개</a>
+  <a href="#worker" onclick="toggleMenu()">일자리 찾기</a>
+  <a href="#owner" onclick="toggleMenu()">워커 찾기</a>
+  <a href="#how" onclick="toggleMenu()">이용 방법</a>
+  <a href="#pricing" onclick="toggleMenu()">요금 안내</a>
   <a href="login.html">로그인</a>
-  <a href="signup.html" class="dl-btn" style="display:inline-block;margin-top:8px;">무료로 시작하기</a>
+  <a href="signup.html" class="dl-btn" style="display:inline-block;margin-top:8px;">회원가입</a>
 </div>
 
-<!-- HERO -->
+<!-- 1. HERO -->
 <div class="hero">
   <div class="hero-orb hero-orb-1"></div>
   <div class="hero-orb hero-orb-2"></div>
   <div class="hero-orb hero-orb-3"></div>
 
   <div class="hero-txt">
-    <img src="OJOb_logo.png" alt="OJOb" class="reveal" style="height:72px;object-fit:contain;margin-bottom:24px;display:block;"/>
-    <div class="campaign-tag reveal">
-      <span class="dot"></span>
-      알바는 왜 레퍼첵이 없나요?
-    </div>
-    <h1 class="reveal delay-1">일한 만큼,<br/><span class="accent">경력이 되도록.</span></h1>
-    <p class="slogan reveal delay-2">WORK TODAY, A STRONGER YOU · GOOD JOBS CLOSER TO YOU</p>
-    <p class="reveal delay-2">시프트 하나하나가 검증된 포트폴리오로 쌓입니다.<br/>사업주는 믿을 수 있는 워커를, 워커는 증명되는 경력을.</p>
+    <img src="OJOb_logo.png" alt="OJOb" class="reveal" style="height:72px;object-fit:contain;margin-bottom:28px;display:block;"/>
+    <h1 class="reveal delay-1">일이 필요할 때,<br/><span class="accent">사람이 필요할 때.</span></h1>
+    <p class="reveal delay-2" style="margin-top:20px;">가까운 일자리부터 경험이 확인된 워커까지.<br/>OJOb에서 서로에게 맞는 기회를 찾아보세요.</p>
     <div class="hero-btns reveal delay-3">
-      <a href="signup.html" class="btn-p">🚀 무료로 시작하기</a>
-      <a href="#campaign" class="btn-o">왜 OJOb인가 →</a>
-    </div>
-    <div class="stats-row reveal delay-4">
-      <div class="stat-it"><div class="n" data-count="12" data-suffix="분">0분</div><div class="l">평균 매칭 완료</div></div>
-      <div class="stat-it"><div class="n" data-count="1" data-suffix="시간내">당일</div><div class="l">급여 정산</div></div>
-      <div class="stat-it"><div class="n" data-count="3" data-suffix="km">0km</div><div class="l">반경 내 매칭</div></div>
+      <a href="#worker" class="btn-p">일자리 찾기</a>
+      <a href="#owner" class="btn-o">워커 찾아보기</a>
     </div>
   </div>
 
-  <!-- PHONE -->
-  <div id="demo" class="hero-visual reveal-right">
-    <div class="mode-toggle">
-      <button class="mode-btn on" onclick="setMode('worker')">👤 워커</button>
-      <button class="mode-btn" onclick="setMode('employer')">🏢 사업주</button>
+  <div class="hero-visual reveal-right">
+    <div class="route-cards">
+      <a href="#worker" class="route-card rc-worker">
+        <div class="rc-k">일이 필요할 때</div>
+        <div class="rc-h">짧은 경력도,<br/>확인 가능한 경험으로.</div>
+        <div class="rc-go">워커로 시작하기 →</div>
+      </a>
+      <a href="#owner" class="route-card rc-owner">
+        <div class="rc-k">사람이 필요할 때</div>
+        <div class="rc-h">필요한 사람을,<br/>경험과 조건으로 비교하세요.</div>
+        <div class="rc-go">사장님으로 시작하기 →</div>
+      </a>
     </div>
-    <div class="phone">
-      <div class="notch"></div>
-      <div class="screen">
-
-        <!-- WORKER HOME -->
-        <div class="app-screen active" id="w-home">
-          <div class="topbar">
-            <div><img src="OJOb_app_icon_plum.png" alt="OJOb" style="height:28px;border-radius:6px;"/> <div class="tb-loc">📍 강남구 · 오늘도, 좋은 일을 찾아볼까요?</div></div>
-            <button class="notif-btn">🔔</button>
-          </div>
-          <div class="scroll">
-            <div class="push-notif">
-              <div class="push-icon">🔔</div>
-              <div><div class="push-title">새로운 알바 제안이 도착했어요!</div><div class="push-sub">내 근처 3개의 맞춤 알바를 확인해보세요.</div></div>
-              <div class="push-time">지금</div>
-            </div>
-            <div class="search-bar"><div class="search-inner"><span>🔍</span><span>어떤 알바를 찾고 계신가요?</span></div></div>
-            <div class="cat-grid">
-              <div class="cat-item"><div class="ci">☕</div><div class="cl">카페·음식점</div></div>
-              <div class="cat-item"><div class="ci">🏪</div><div class="cl">매장·판매</div></div>
-              <div class="cat-item"><div class="ci">📅</div><div class="cl">사무·행사</div></div>
-              <div class="cat-item"><div class="ci">📦</div><div class="cl">물류·배송</div></div>
-              <div class="cat-item"><div class="ci">🎓</div><div class="cl">교육·튜터</div></div>
-              <div class="cat-item"><div class="ci">•••</div><div class="cl">더보기</div></div>
-            </div>
-            <div class="bottom-cta" onclick="goTo('w-home')">
-              <div><div class="bottom-cta-title">📍 알바는 왜 레퍼첵이 없나요?</div><div class="bottom-cta-sub">일한 만큼, 경력이 되도록.</div></div>
-              <div style="color:#fff;font-size:.9rem;">›</div>
-            </div>
-            <div class="mmap">
-              <div class="mmap-bg"></div>
-              <span class="mpin" style="left:36%;top:28%">📍</span>
-              <span class="mpin" style="left:62%;top:42%">📍</span>
-              <span class="mpin" style="left:28%;top:58%">📍</span>
-              <span class="mypin" style="left:50%;top:50%;transform:translate(-50%,-50%)"></span>
-              <span class="mmap-label">🗺️ 내 주변 5개 공고</span>
-            </div>
-            <div class="sec-hd">🔴 급구 — 오늘 출근 가능</div>
-            <div class="jcard" onclick="goTo('w-detail')">
-              <div class="jcard-top"><span class="jtag red">🔴 급구</span><span class="jdist">0.4km</span></div>
-              <div class="jtitle">홀서빙 스태프</div>
-              <div class="jmeta">📍 강남구 이탈리안 · 오늘 17:00~22:00</div>
-              <div class="jcard-bot"><span class="jpay">₩68,000</span><span class="jtime">5시간 · 당일정산</span></div>
-            </div>
-            <div class="jcard" onclick="goTo('w-detail2')">
-              <div class="jcard-top"><span class="jtag purple">🟣 주방</span><span class="jdist">1.2km</span></div>
-              <div class="jtitle">주방 보조</div>
-              <div class="jmeta">📍 마포구 한식당 · 오늘 10:00~15:00</div>
-              <div class="jcard-bot"><span class="jpay">₩65,000</span><span class="jtime">5시간 · 당일정산</span></div>
-            </div>
-          </div>
-          <div class="bnav">
-            <div class="bn-item on"><div class="bn-ic">🏠</div><div class="bn-lb">홈</div></div>
-            <div class="bn-item"><div class="bn-ic">🔍</div><div class="bn-lb">알바찾기</div></div>
-            <div class="bn-item" onclick="goTo('w-wallet')"><div class="bn-ic">📋</div><div class="bn-lb">내기록</div></div>
-            <div class="bn-item" onclick="goTo('w-profile')"><div class="bn-ic">👤</div><div class="bn-lb">MY</div></div>
-          </div>
-        </div>
-
-        <!-- WORKER DETAIL 1 -->
-        <div class="app-screen" id="w-detail">
-          <div class="detail-img">🍽️<button class="back-btn" onclick="goTo('w-home')">◀</button></div>
-          <div class="scroll" style="background:#fff;">
-            <div class="detail-body">
-              <div class="detail-tags"><span class="jtag red">🔴 급구</span><span class="jtag green">당일정산</span></div>
-              <div class="d-title">홀서빙 스태프</div>
-              <div class="d-sub">📍 강남구 역삼동 · ⭐ 4.9 (리뷰 42개)</div>
-              <div class="d-row">🕐 <strong>오늘 17:00 ~ 22:00</strong> (5시간)</div>
-              <div class="d-row">📌 <strong>주문 받기, 테이블 정리, 음료 서빙</strong></div>
-              <div class="d-row">👗 <strong>복장:</strong> 검정 상의 + 청바지</div>
-              <div class="d-row">👥 <strong>모집 인원:</strong> 2명 (1명 남음)</div>
-              <div class="divider"></div>
-              <div class="pay-box">
-                <div class="pb-l"><div class="amt">₩68,000</div><div class="sub">5시간 · 시급 ₩13,600</div></div>
-                <div class="pb-r">⚡ 근무 완료 후<br/>1시간 내 정산</div>
-              </div>
-              <button class="accept-btn" onclick="goTo('w-confirm')">⚡ 바로 수락하기</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- WORKER DETAIL 2 -->
-        <div class="app-screen" id="w-detail2">
-          <div class="detail-img" style="background:linear-gradient(135deg,#5820CC,#7A3BFF);">🍳<button class="back-btn" onclick="goTo('w-home')">◀</button></div>
-          <div class="scroll" style="background:#fff;">
-            <div class="detail-body">
-              <div class="detail-tags"><span class="jtag purple">🟣 주방</span><span class="jtag green">당일정산</span></div>
-              <div class="d-title">주방 보조</div>
-              <div class="d-sub">📍 마포구 합정동 · ⭐ 4.7 (리뷰 28개)</div>
-              <div class="d-row">🕐 <strong>오늘 10:00 ~ 15:00</strong> (5시간)</div>
-              <div class="d-row">📌 <strong>재료 손질, 세척, 주방 보조</strong></div>
-              <div class="d-row">👗 <strong>복장:</strong> 편한 복장 (앞치마 제공)</div>
-              <div class="divider"></div>
-              <div class="pay-box">
-                <div class="pb-l"><div class="amt">₩65,000</div><div class="sub">5시간 · 시급 ₩13,000</div></div>
-                <div class="pb-r">⚡ 근무 완료 후<br/>1시간 내 정산</div>
-              </div>
-              <button class="accept-btn" onclick="goTo('w-confirm')">⚡ 바로 수락하기</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- WORKER CONFIRM -->
-        <div class="app-screen" id="w-confirm">
-          <div class="topbar">
-            <button style="width:28px;height:28px;border:none;background:var(--misty);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;cursor:pointer;color:var(--p);" onclick="goTo('w-home')">◀</button>
-            <div style="font-size:.85rem;font-weight:700;">수락 완료</div>
-            <div style="width:28px;"></div>
-          </div>
-          <div class="confirm-screen">
-            <div class="confetti">🎉</div>
-            <div class="conf-title">매칭 완료!</div>
-            <div class="conf-sub">출근 준비하세요. 사업주가 확인 중입니다.</div>
-            <div class="conf-card">
-              <div class="conf-row"><span class="ck">📍 장소</span><span class="cv">강남구 이탈리안</span></div>
-              <div class="conf-row"><span class="ck">🕐 시간</span><span class="cv">오늘 17:00~22:00</span></div>
-              <div class="conf-row"><span class="ck">💰 급여</span><span class="cv" style="color:var(--g)">₩68,000</span></div>
-              <div class="conf-row"><span class="ck">⚡ 정산</span><span class="cv">근무 후 1시간 내</span></div>
-            </div>
-            <button class="map-go" onclick="goTo('w-home')">🗺️ 길 안내 시작</button>
-            <div style="font-size:.68rem;color:var(--muted);margin-top:8px;">QR 체크인은 현장 도착 후 진행</div>
-          </div>
-        </div>
-
-        <!-- WORKER WALLET -->
-        <div class="app-screen" id="w-wallet">
-          <div class="wallet-head">
-            <div class="wh-bal">이번 달 수입</div>
-            <div class="wh-amt">₩ 487,000</div>
-            <div class="wh-row">
-              <button class="wh-btn" onclick="goTo('w-home')">+ 일 찾기</button>
-              <button class="wh-btn">↑ 출금</button>
-            </div>
-          </div>
-          <div class="scroll" style="padding-top:10px;">
-            <div class="sec-hd">최근 정산 내역</div>
-            <div class="tx-item"><div class="tx-l"><div class="tx-nm">홀서빙 — 강남 이탈리안</div><div class="tx-dt">오늘 22:14</div></div><div class="tx-r"><div class="tx-am">+₩68,000</div><div class="tx-st">✅ 정산완료</div></div></div>
-            <div class="tx-item"><div class="tx-l"><div class="tx-nm">주방보조 — 마포 한식당</div><div class="tx-dt">어제 15:32</div></div><div class="tx-r"><div class="tx-am">+₩65,000</div><div class="tx-st">✅ 정산완료</div></div></div>
-            <div class="tx-item"><div class="tx-l"><div class="tx-nm">팝업스토어 스태프</div><div class="tx-dt">3일 전</div></div><div class="tx-r"><div class="tx-am">+₩98,000</div><div class="tx-st">✅ 정산완료</div></div></div>
-          </div>
-          <div class="bnav">
-            <div class="bn-item" onclick="goTo('w-home')"><div class="bn-ic">🏠</div><div class="bn-lb">홈</div></div>
-            <div class="bn-item"><div class="bn-ic">🔍</div><div class="bn-lb">알바찾기</div></div>
-            <div class="bn-item on"><div class="bn-ic">📋</div><div class="bn-lb">내기록</div></div>
-            <div class="bn-item" onclick="goTo('w-profile')"><div class="bn-ic">👤</div><div class="bn-lb">MY</div></div>
-          </div>
-        </div>
-
-        <!-- WORKER PROFILE -->
-        <div class="app-screen" id="w-profile">
-          <div class="prof-head">
-            <div class="av">👩</div>
-            <div class="prof-info">
-              <div class="pname">이승아</div>
-              <div class="prating">⭐⭐⭐⭐⭐ 4.9 · 리뷰 38개</div>
-              <div class="ptag">총 32회 · 재고용 94%</div>
-            </div>
-            <button class="edit-btn">편집</button>
-          </div>
-          <div class="scroll">
-            <div style="background:var(--misty);margin:10px;border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;">
-              <div style="font-size:.72rem;font-weight:700;color:var(--p);">🔗 포트폴리오 공유하기</div>
-              <div style="font-size:.65rem;color:var(--p);">ojob.kr/p/sa.yi</div>
-            </div>
-            <div class="sec-hd">인증된 스킬</div>
-            <div class="skill-chips">
-              <span class="sc v">✅ 홀서빙</span><span class="sc v">✅ 주방보조</span><span class="sc v">✅ 카페</span>
-              <span class="sc u">배달 (미인증)</span><span class="sc u">이벤트 (미인증)</span>
-            </div>
-            <div style="font-size:.65rem;color:var(--p);padding:0 12px;margin-bottom:12px;cursor:pointer;">+ 스킬 추가 인증 신청 →</div>
-            <div class="sec-hd">최근 리뷰</div>
-            <div class="rev-item"><div class="rev-top"><span class="rev-shop">강남 이탈리안</span><span class="rev-stars">⭐⭐⭐⭐⭐</span></div><div class="rev-txt">"눈치 빠르고 서빙이 자연스러워서 정말 좋았어요!"</div></div>
-            <div class="rev-item"><div class="rev-top"><span class="rev-shop">마포 한식당</span><span class="rev-stars">⭐⭐⭐⭐⭐</span></div><div class="rev-txt">"위생 철저하고 주방 일을 잘 도와줬어요. 또 불러요!"</div></div>
-          </div>
-          <div class="bnav">
-            <div class="bn-item" onclick="goTo('w-home')"><div class="bn-ic">🏠</div><div class="bn-lb">홈</div></div>
-            <div class="bn-item"><div class="bn-ic">🔍</div><div class="bn-lb">알바찾기</div></div>
-            <div class="bn-item" onclick="goTo('w-wallet')"><div class="bn-ic">📋</div><div class="bn-lb">내기록</div></div>
-            <div class="bn-item on"><div class="bn-ic">👤</div><div class="bn-lb">MY</div></div>
-          </div>
-        </div>
-
-        <!-- EMPLOYER DASH -->
-        <div class="app-screen" id="e-dash">
-          <div class="dash-head">
-            <div class="dh-top">
-              <div class="dh-store"><span class="dot"></span>강남 이탈리안 레스토랑</div>
-              <button class="notif-btn" style="background:rgba(255,255,255,.2);border:none;">🔔</button>
-            </div>
-            <div class="dh-alert">🚨 오늘 17:00 홀서빙 1명 아직 미매칭</div>
-          </div>
-          <div class="scroll">
-            <div class="kpi-row">
-              <div class="kpi"><div class="kn" style="color:var(--g)">3명</div><div class="kl">오늘 확정 워커</div></div>
-              <div class="kpi"><div class="kn" style="color:var(--a)">1명</div><div class="kl">매칭 대기 중</div></div>
-              <div class="kpi"><div class="kn" style="color:var(--p)">₩204K</div><div class="kl">이번달 인건비</div></div>
-              <div class="kpi"><div class="kn" style="color:var(--y)">4.8⭐</div><div class="kl">워커 평균 평점</div></div>
-            </div>
-            <button class="post-btn" onclick="goTo('e-post')">🚨 긴급 공고 올리기</button>
-            <div class="sec-hd" style="margin-top:8px;">오늘 출근 예정</div>
-            <div class="app-card"><div class="app-av" style="background:linear-gradient(135deg,var(--p),var(--p2))">👩</div><div class="app-info"><div class="an">이승아</div><div class="ar">⭐ 4.9 · 홀서빙 인증</div><div class="am">오늘 17:00 출근 예정</div></div><div style="margin-left:auto;font-size:.65rem;color:var(--g);font-weight:700;">확정✅</div></div>
-            <div class="sec-hd">지원자 검토</div>
-            <div class="app-card" onclick="goTo('e-applicants')"><div class="app-av" style="background:linear-gradient(135deg,var(--y),#D4880A)">👩</div><div class="app-info"><div class="an">박지현</div><div class="ar">⭐ 4.8 · 주방 인증</div><div class="am">0.8km · 즉시 출근 가능</div></div><div class="app-btns"><button class="acc-btn" onclick="event.stopPropagation();goTo('e-dash')">수락</button><button class="rej-btn">✕</button></div></div>
-          </div>
-          <div class="bnav">
-            <div class="bn-item on"><div class="bn-ic">🏠</div><div class="bn-lb">홈</div></div>
-            <div class="bn-item" onclick="goTo('e-post')"><div class="bn-ic">➕</div><div class="bn-lb">공고등록</div></div>
-            <div class="bn-item" onclick="goTo('e-applicants')"><div class="bn-ic">👥</div><div class="bn-lb">지원자</div></div>
-            <div class="bn-item"><div class="bn-ic">💳</div><div class="bn-lb">정산</div></div>
-          </div>
-        </div>
-
-        <!-- EMPLOYER POST -->
-        <div class="app-screen" id="e-post">
-          <div class="topbar">
-            <button style="width:28px;height:28px;border:none;background:var(--misty);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;cursor:pointer;color:var(--p);" onclick="goTo('e-dash')">◀</button>
-            <div style="font-size:.85rem;font-weight:700;">🚨 긴급 공고 등록</div>
-            <div style="width:28px;"></div>
-          </div>
-          <div class="scroll" style="background:#fff;padding-top:8px;">
-            <div class="form-grp"><label>직종 선택</label><div class="tag-row"><button class="sel-tag on">🍽️ 홀서빙</button><button class="sel-tag">🍳 주방</button><button class="sel-tag">🚴 배달</button><button class="sel-tag">🎤 이벤트</button></div></div>
-            <div class="form-grp"><label>근무 날짜</label><input type="date" value="2025-07-14"/></div>
-            <div class="form-grp"><label>근무 시간</label><div style="display:flex;gap:6px;align-items:center;"><input type="time" value="17:00" style="flex:1;"/><span style="color:var(--muted);font-size:.7rem;">~</span><input type="time" value="22:00" style="flex:1;"/></div></div>
-            <div class="form-grp"><label>모집 인원</label><select><option>1명</option><option selected>2명</option><option>3명</option></select></div>
-            <div class="form-grp"><label>시급 (원)</label><input type="number" value="13600"/></div>
-            <button class="submit-btn" onclick="goTo('e-applicants')">🚨 즉시 공고 올리기</button>
-          </div>
-        </div>
-
-        <!-- EMPLOYER APPLICANTS -->
-        <div class="app-screen" id="e-applicants">
-          <div class="topbar">
-            <button style="width:28px;height:28px;border:none;background:var(--misty);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;cursor:pointer;color:var(--p);" onclick="goTo('e-dash')">◀</button>
-            <div style="font-size:.85rem;font-weight:700;">지원자 목록 (4명)</div>
-            <div style="width:28px;"></div>
-          </div>
-          <div class="scroll" style="padding-top:8px;">
-            <div style="margin:0 10px 10px;font-size:.68rem;color:var(--p);background:var(--misty);border-radius:8px;padding:8px 10px;">🚨 공고 올린 지 8분 만에 4명 지원!</div>
-            <div class="app-card"><div class="app-av" style="background:linear-gradient(135deg,var(--p),var(--p2))">👩</div><div class="app-info"><div class="an">이승아</div><div class="ar">⭐ 4.9 · 홀서빙 인증 ✅</div><div class="am">0.4km · 32회 근무 경력</div></div><div class="app-btns"><button class="acc-btn" onclick="goTo('e-dash')">수락</button><button class="rej-btn">✕</button></div></div>
-            <div class="app-card"><div class="app-av" style="background:linear-gradient(135deg,var(--g),#1A9E80)">👩</div><div class="app-info"><div class="an">최유진</div><div class="ar">⭐ 4.8 · 홀서빙 인증 ✅</div><div class="am">0.9km · 18회 근무 경력</div></div><div class="app-btns"><button class="acc-btn" onclick="goTo('e-dash')">수락</button><button class="rej-btn">✕</button></div></div>
-            <div class="app-card"><div class="app-av" style="background:linear-gradient(135deg,var(--y),#D4880A)">👨</div><div class="app-info"><div class="an">박성준</div><div class="ar">⭐ 4.6 · 홀서빙 인증 ✅</div><div class="am">1.3km · 7회 근무 경력</div></div><div class="app-btns"><button class="acc-btn" onclick="goTo('e-dash')">수락</button><button class="rej-btn">✕</button></div></div>
-          </div>
-          <div class="bnav">
-            <div class="bn-item" onclick="goTo('e-dash')"><div class="bn-ic">🏠</div><div class="bn-lb">홈</div></div>
-            <div class="bn-item" onclick="goTo('e-post')"><div class="bn-ic">➕</div><div class="bn-lb">공고등록</div></div>
-            <div class="bn-item on"><div class="bn-ic">👥</div><div class="bn-lb">지원자</div></div>
-            <div class="bn-item"><div class="bn-ic">💳</div><div class="bn-lb">정산</div></div>
-          </div>
-        </div>
-
-      </div><!-- /screen -->
-    </div><!-- /phone -->
-  </div><!-- /hero-visual -->
+  </div>
 </div><!-- /hero -->
 
-<!-- CAMPAIGN -->
-<section id="campaign">
-  <div class="campaign-bg-text">OJOb</div>
-  <div class="campaign-wrap">
-
-    <h2 class="campaign-q reveal">
-      알바는 왜<br/><span class="highlight">레퍼첵</span>이 없나요?
-    </h2>
-    <p class="campaign-a reveal delay-1">
-      정규직엔 레퍼런스 체크가 있습니다. 하지만 알바는?<br/>
-      사업주는 <strong>지원자를 믿을 수 없어</strong> 쓰기 두렵고,<br/>
-      워커는 <strong>열심히 일해도 아무것도 남지 않습니다.</strong>
-    </p>
-    <div class="campaign-pill reveal delay-2">
-      <span class="pill-dot"></span>
-      OJOb은 일한 만큼, 경력이 되도록 만듭니다
+<!-- 2. WHY -->
+<section id="why" style="background:var(--section-bg);">
+  <div class="container">
+    <div class="sec-lbl reveal">OJOb가 다른 이유</div>
+    <h2 class="sec-h reveal">경험을 확인하고, 조건을 비교하고,<br/>직접 선택하세요.</h2>
+    <p class="sec-p reveal">아래 기능은 현재 출시를 준비하고 있어요.</p>
+    <div class="grid4">
+      <div class="fcard reveal"><div class="fnum">01</div><h3>확인 가능한 경력 <span class="tag-soon">준비 중</span></h3><p>워커가 등록한 경험과 확인된 경력 정보를 구분해 보여줍니다.</p></div>
+      <div class="fcard reveal delay-1"><div class="fnum">02</div><h3>한눈에 보는 매칭 적합도 <span class="tag-soon">준비 중</span></h3><p>거리, 근무 가능 시간, 업무 경험 등을 바탕으로 적합도를 계산합니다.</p></div>
+      <div class="fcard reveal delay-2"><div class="fnum">03</div><h3>우수 워커풀 <span class="tag-soon">준비 중</span></h3><p>경력과 검증 정보를 바탕으로 더 적합한 워커를 찾아보세요.</p></div>
+      <div class="fcard reveal delay-3"><div class="fnum">04</div><h3>투명한 시급 정보 <span class="tag-soon">준비 중</span></h3><p>OJOb에서 형성된 최근 채용 약정 시급을 확인할 수 있습니다.</p></div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section id="feat">
-  <div class="container">
-    <div class="sec-lbl reveal">핵심 기능 — Features</div>
-    <h2 class="sec-h reveal">기존과 다른<br/>4가지 차이</h2>
-    <p class="sec-p reveal">단순한 구인구직이 아닙니다. 빠르고, 안전하고, 즉각 정산되는 새로운 방식입니다.</p>
-    <div class="feat-grid">
-      <div class="fcard reveal"><div class="fic">⚡</div><h3>평균 12분 매칭</h3><p>GPS 기반으로 반경 3km 내 가용 워커에게 즉시 푸시 알림. 빠르면 5분 내 매칭 완료.</p></div>
-      <div class="fcard reveal delay-1"><div class="fic">🪙</div><h3>당일 급여 정산</h3><p>근무 종료 후 1시간 이내 앱 지갑으로 자동 입금. 주/월 단위 기다림 없이 바로 수령.</p></div>
-      <div class="fcard reveal delay-2"><div class="fic">🎖️</div><h3>스킬 인증 프로필</h3><p>홀서빙·주방·배달 등 직종별 인증 뱃지로 믿을 수 있는 워커를 한눈에 확인.</p></div>
-      <div class="fcard reveal delay-3"><div class="fic">🛡️</div><h3>보험 자동 가입</h3><p>근무 시작과 동시에 단기 근무자 보험 자동 연계. 사업주·워커 모두 안전하게.</p></div>
+<!-- 3. OWNER -->
+<section id="owner">
+  <div class="container split">
+    <div class="reveal-left">
+      <div class="sec-lbl">사장님을 위한 OJOb</div>
+      <h2 class="sec-h">필요한 시간에,<br/>필요한 경험을 가진 사람을.</h2>
+      <p class="sec-p" style="margin-bottom:24px;">무료로 공고를 올리고, 조건에 맞는 워커의 적합도와 경력을 비교하세요.</p>
+      <ul class="chk-list">
+        <li>일반 공고 등록 무료</li>
+        <li>워커 매칭 적합도 확인</li>
+        <li>경력 확인 정보 제공</li>
+        <li>우수 워커풀 유료 열람 <span class="tag-soon">준비 중</span></li>
+        <li>긴급 공고 광고 선택 가능 <span class="tag-soon">준비 중</span></li>
+      </ul>
+      <a href="signup.html?type=employer" class="btn-p">워커 찾아보기</a>
     </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <div class="container">
-    <div class="sec-lbl reveal">NEW · 자동 포트폴리오</div>
-    <h2 class="sec-h reveal">시프트 완료할 때마다<br/><span style="color:var(--p);">자동으로 쌓이는</span> 커리어</h2>
-    <p class="sec-p reveal">근무할수록 리뷰와 통계가 자동 누적돼 공유 가능한 포트폴리오가 됩니다.</p>
-    <div class="portfolio-wrap">
-      <div class="reveal-left">
-        <div class="pf-item"><div class="pf-icon">⭐</div><div class="pf-text"><h4>5개 항목 양방향 리뷰</h4><p>태도·시간약속·업무능력·소통·팀워크. 사업주와 워커가 서로 평가합니다.</p></div></div>
-        <div class="pf-item"><div class="pf-icon">🔗</div><div class="pf-text"><h4>공유 가능한 웹 포트폴리오</h4><p>ojob.kr/p/나의핸들 — 누구나 열람 가능, 직접 매칭 요청 가능.</p></div></div>
-        <div class="pf-item"><div class="pf-icon">📊</div><div class="pf-text"><h4>누적 통계 자동 계산</h4><p>근무 시간, 수입, 재고용률이 실시간으로 업데이트됩니다.</p></div></div>
-        <div class="review-badge">🔒 평가 완료 후 정산 진행 — 리뷰 게이팅 시스템</div>
-        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
-          <a href="portfolio.html" style="display:inline-flex;align-items:center;gap:6px;background:var(--p);color:#fff;padding:10px 20px;border-radius:12px;font-size:.85rem;font-weight:700;text-decoration:none;box-shadow:0 4px 12px rgba(122,59,255,.25);">👁️ 샘플 포트폴리오 보기</a>
-          <a href="signup.html?type=worker" style="display:inline-flex;align-items:center;gap:6px;background:var(--misty);color:var(--p);padding:10px 20px;border-radius:12px;font-size:.85rem;font-weight:700;text-decoration:none;border:1.5px solid var(--lilac);">✨ 내 포트폴리오 만들기</a>
-        </div>
+    <div class="info-card reveal-right">
+      <div class="demo-badge">데모 데이터 · 실제 사용자 아님</div>
+      <div class="match-head">
+        <div><div class="match-name">워커 A</div><div style="font-size:.8rem;color:var(--muted);">카페 · 마포구</div></div>
+        <div class="match-score">87%<small>업무 적합도</small></div>
       </div>
-      <div class="portfolio-card reveal-right">
-        <div class="pc-header">
-          <div class="pc-av">👩</div>
-          <div><div class="pc-name">이승아</div><div class="pc-rating">⭐ 4.9 · 리뷰 38개</div><div class="pc-link">🔗 ojob.kr/p/sa.yi</div></div>
-        </div>
-        <div class="pc-stats">
-          <div class="pc-stat"><div class="ps-n">192h</div><div class="ps-l">누적 근무</div></div>
-          <div class="pc-stat"><div class="ps-n">₩2.1M</div><div class="ps-l">누적 수입</div></div>
-          <div class="pc-stat"><div class="ps-n">32회</div><div class="ps-l">총 시프트</div></div>
-          <div class="pc-stat"><div class="ps-n">94%</div><div class="ps-l">재고용률</div></div>
-        </div>
-        <div style="font-size:.65rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">검증된 스킬</div>
-        <div class="pc-skills">
-          <span class="ps-chip">✅ 홀서빙 78h</span>
-          <span class="ps-chip">✅ 주방보조 64h</span>
-          <span class="ps-chip">✅ 카페 32h</span>
-        </div>
+      <div class="verif-row"><span>근무지까지</span><b>2.1km</b></div>
+      <div class="verif-row"><span>카페 업무 경험</span><span class="vb vb-doc">경력 자료 확인</span></div>
+      <div class="verif-row"><span>근무 가능 시간</span><b>일치</b></div>
+      <div class="verif-row"><span>최근 3개월 OJOb 채용 시급</span><b>14,500원 <span style="font-weight:500;color:var(--muted);font-size:.78rem;">(3건)</span></b></div>
+      <div class="match-note">매칭 적합도는 조건이 얼마나 맞는지를 나타내며, 채용 성공 확률이 아닙니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. WORKER -->
+<section id="worker" style="background:var(--section-bg);">
+  <div class="container split">
+    <div class="info-card reveal-left">
+      <div class="ic-t">경력은 확인 범위에 따라 구분해 표시돼요</div>
+      <div class="verif-row"><span>본인이 작성한 경력</span><span class="vb vb-self">본인 작성</span></div>
+      <div class="verif-row"><span>제출 자료로 확인한 경력</span><span class="vb vb-doc">경력 자료 확인</span></div>
+      <div class="verif-row"><span>OJOb에서 채용된 이력</span><span class="vb vb-hire">OJOb 채용 이력</span></div>
+      <div class="verif-row"><span>OJOb에서 근무를 마친 이력</span><span class="vb vb-work">OJOb 근무 수행</span></div>
+      <div class="grade-row">
+        <span class="grade-chip">New</span>
+        <span class="grade-chip">Experienced</span>
+        <span class="grade-chip">Verified <span style="font-weight:500;">(기준 준비 중)</span></span>
       </div>
     </div>
+    <div class="reveal-right">
+      <div class="sec-lbl">워커를 위한 OJOb</div>
+      <h2 class="sec-h">당신이 해온 일,<br/>그 경험이 보이도록.</h2>
+      <p class="sec-p" style="margin-bottom:24px;">짧은 아르바이트 경험도 소중한 경력입니다. 해온 일을 등록하고, 확인 가능한 경력을 쌓아보세요.</p>
+      <ul class="chk-list">
+        <li>무료 프로필 등록</li>
+        <li>아르바이트 경력 기록</li>
+        <li>경력 확인 신청</li>
+        <li>근거리 일자리 탐색 <span class="tag-soon">준비 중</span></li>
+        <li>OJOb 채용 시급 이력 확인 <span class="tag-soon">준비 중</span></li>
+      </ul>
+      <a href="signup.html?type=worker" class="btn-p">내 경력 등록하기</a>
+    </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- 5. HOW -->
 <section id="how">
   <div class="container">
-    <div class="sec-lbl reveal">이용 방법 — How It Works</div>
-    <h2 class="sec-h reveal">공고 등록부터<br/>정산까지 당일 완결</h2>
-    <p class="sec-p reveal">복잡한 절차 없이, 딱 4단계로 끝납니다.</p>
-    <div class="how-steps">
-      <div class="hstep reveal"><div class="sn">01</div><div class="sic">📝</div><h4>공고 등록 (3분)</h4><p>사업주가 직종·시간·시급 입력. 즉시 게시.</p></div>
-      <div class="hstep reveal delay-1"><div class="sn">02</div><div class="sic">🔔</div><h4>근처 워커에 알림</h4><p>반경 3km 내 워커에게 자동 푸시. 프로필 확인 후 선택.</p></div>
-      <div class="hstep reveal delay-2"><div class="sn">03</div><div class="sic">✅</div><h4>원탭 수락 → 출근</h4><p>워커 수락 → QR 체크인 → 내비게이션 자동 연동.</p></div>
-      <div class="hstep reveal delay-3"><div class="sn">04</div><div class="sic">💰</div><h4>당일 자동 정산</h4><p>근무 종료 후 워커 앱 지갑으로 즉시 입금.</p></div>
+    <div class="sec-lbl reveal">이용 방법</div>
+    <h2 class="sec-h reveal">매칭률만 보여주지 않습니다.<br/>이유도 보여줍니다.</h2>
+    <p class="sec-p reveal">거리, 근무 가능 시간, 업무 경험, 스킬을 비교해 적합도와 그 근거를 함께 보여드려요. 채용 조건 협의와 고용은 사장님과 워커가 직접 진행합니다.</p>
+    <div class="flow-wrap">
+      <div class="flow reveal">
+        <h3>워커</h3>
+        <ol><li>경력 등록</li><li>일자리 검색</li><li>지원</li></ol>
+      </div>
+      <div class="flow reveal delay-1">
+        <h3>사장님</h3>
+        <ol><li>공고 등록</li><li>자동 매칭 확인</li><li>워커 비교</li><li>직접 연락 및 협의</li></ol>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SOCIAL PROOF -->
-<section id="proof">
+<!-- 6. TALENT POOL -->
+<section id="pool">
   <div class="container">
-    <div class="sec-lbl reveal">실제 후기 — Reviews</div>
-    <h2 class="sec-h reveal">이미 써본 사람들의<br/>이야기</h2>
-    <div class="proof-grid">
-      <div class="proof-card reveal">
-        <div class="proof-stars">⭐⭐⭐⭐⭐</div>
-        <p class="proof-txt">"공고 올리고 8분 만에 4명이 지원했어요. 예전엔 당일 알바 구하는 게 불가능했는데 이젠 걱정 없어요."</p>
-        <div class="proof-user"><div class="proof-av">🏪</div><div><div class="proof-name">김사장님</div><div class="proof-role">강남구 카페 운영</div></div></div>
+    <div class="sec-lbl reveal" style="color:var(--lilac);">우수 워커풀</div>
+    <h2 class="sec-h reveal">경험이 확인된 워커를<br/>더 자세히 살펴보세요.</h2>
+    <p class="sec-p reveal">기본 워커 검색과 매칭 적합도는 무료예요. 추가 검증 정보와 우수 워커풀 상세 열람은 별도 상품으로 제공할 예정입니다.</p>
+    <span class="btn-soon reveal">출시 예정</span>
+  </div>
+</section>
+
+<!-- 7. PRICING -->
+<section id="pricing" style="background:var(--section-bg);">
+  <div class="container">
+    <div class="sec-lbl reveal">요금 안내</div>
+    <h2 class="sec-h reveal">필요한 만큼 선택하는<br/>합리적인 요금제</h2>
+    <div class="price-grid" style="margin-top:36px;">
+      <div class="price-card hl reveal">
+        <h3>기본 이용</h3>
+        <div class="pr">무료</div>
+        <ul class="chk-list"><li>워커 회원가입</li><li>일반 구인 공고</li><li>기본 워커 검색</li><li>매칭 적합도 확인</li></ul>
       </div>
-      <div class="proof-card reveal delay-1">
-        <div class="proof-stars">⭐⭐⭐⭐⭐</div>
-        <p class="proof-txt">"일하고 1시간 안에 돈이 들어왔어요. 처음엔 믿기지 않았는데 진짜였어요. 포트폴리오도 자동으로 쌓이고 너무 좋아요."</p>
-        <div class="proof-user"><div class="proof-av">👩</div><div><div class="proof-name">이승아</div><div class="proof-role">홀서빙·주방 워커</div></div></div>
+      <div class="price-card reveal delay-1">
+        <h3>프리미엄 인재 검색</h3>
+        <div class="pr tbd">가격 준비 중</div>
+        <ul class="chk-list"><li>우수 워커풀 추가 접근</li><li>상세 경력 정보 열람</li><li>기간형 또는 건수형 상품</li></ul>
       </div>
-      <div class="proof-card reveal delay-2">
-        <div class="proof-stars">⭐⭐⭐⭐⭐</div>
-        <p class="proof-txt">"워커 프로필에 재고용률이 나오니까 믿고 뽑을 수 있어요. 노쇼 걱정이 확 줄었습니다."</p>
-        <div class="proof-user"><div class="proof-av">🍽️</div><div><div class="proof-name">박사장님</div><div class="proof-role">마포구 한식당 운영</div></div></div>
+      <div class="price-card reveal delay-2">
+        <h3>공고 광고</h3>
+        <div class="pr tbd">가격 준비 중</div>
+        <ul class="chk-list"><li>24시간</li><li>72시간</li><li>7일</li></ul>
       </div>
+    </div>
+    <p class="fine">유료 상품은 출시 전이며, 가격은 확정되면 안내해 드려요. 광고 구매가 채용 성사를 보장하지는 않습니다.</p>
+  </div>
+</section>
+
+<!-- 8. FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="sec-lbl reveal">FAQ</div>
+    <h2 class="sec-h reveal">자주 묻는 질문</h2>
+    <div class="faq" style="margin-top:24px;">
+      <details><summary>OJOb는 누구나 무료로 가입할 수 있나요?</summary><p>워커 회원가입과 기본 구인 공고 등록은 무료를 기본으로 합니다.</p></details>
+      <details><summary>워커의 경력은 어떻게 확인하나요?</summary><p>워커가 제출한 경력 정보 중 관리자 확인을 거친 항목을 구분해 표시합니다.</p></details>
+      <details><summary>매칭 적합도는 무엇인가요?</summary><p>업무 경험, 근무 가능 시간, 거리 등 공고와 워커의 조건 일치 정도를 나타냅니다. 채용 성공 확률을 의미하지는 않습니다.</p></details>
+      <details><summary>우수 워커풀은 무엇인가요?</summary><p>정해진 기준에 따라 경력 또는 수행 이력이 확인된 워커의 상세 정보를 제공하는 서비스입니다.</p></details>
+      <details><summary>OJOb에서 급여를 지급하나요?</summary><p>아닙니다. 급여 지급과 근로계약은 사업주와 워커가 직접 진행합니다.</p></details>
+      <details><summary>표시된 평균 시급을 반드시 지급해야 하나요?</summary><p>아닙니다. 평균 시급은 과거 OJOb 채용 이력을 바탕으로 산출한 참고 정보입니다. 실제 임금은 법령을 준수하는 범위에서 당사자들이 협의합니다.</p></details>
     </div>
   </div>
 </section>
@@ -1104,12 +966,11 @@ section{padding:90px 48px;}
   <div class="cta-orb cta-orb-2"></div>
   <div class="container">
     <div class="cta-box">
-      <div class="sec-lbl reveal" style="color:rgba(255,255,255,.6);justify-content:center;display:flex;">지금 시작하기</div>
-      <h2 class="reveal">지금 바로<br/>시작해보세요</h2>
-      <p class="reveal delay-1">사업주도, 워커도 — 가입은 무료예요.<br/>매칭 성사 시에만 수수료가 발생해요.</p>
+      <h2 class="reveal">일이 필요할 때,<br/>사람이 필요할 때.</h2>
+      <p class="reveal delay-1">워커도, 사장님도 가입은 무료예요.</p>
       <div class="store-btns reveal delay-2">
-        <a href="signup.html?type=worker" class="sbtn"><div class="sico">👤</div><div class="st"><span class="sl">일하고 싶어요</span><span class="sn2">구직자로 시작</span></div></a>
-        <a href="signup.html?type=employer" class="sbtn"><div class="sico">🏢</div><div class="st"><span class="sl">사람이 필요해요</span><span class="sn2">사업주로 시작</span></div></a>
+        <a href="signup.html?type=worker" class="sbtn"><div class="st"><span class="sl">일이 필요해요</span><span class="sn2">워커로 시작</span></div></a>
+        <a href="signup.html?type=employer" class="sbtn"><div class="st"><span class="sl">사람이 필요해요</span><span class="sn2">사장님으로 시작</span></div></a>
       </div>
     </div>
   </div>
@@ -1119,87 +980,29 @@ section{padding:90px 48px;}
 <footer>
   <div>
     <img src="OJOb_app_icon_white.png" alt="OJOb" style="height:48px;border-radius:12px;margin-bottom:10px;display:block;"/>
-    <div class="footer-slogan" style="color:rgba(255,255,255,.6);font-size:.85rem;margin-bottom:4px;">일한 만큼, 경력이 되도록.</div>
+    <div class="footer-slogan" style="color:rgba(255,255,255,.6);font-size:.85rem;margin-bottom:4px;">일이 필요할 때, 사람이 필요할 때.</div>
     <img src="Seed_Archive_logo.png" alt="Seed Archive" style="height:24px;object-fit:contain;opacity:.4;margin-top:8px;display:block;filter:brightness(10);"/>
   </div>
-  <p>© 2025 씨드 아카이브 (Seed Archive Inc.) · <a href="mailto:saralee8694@gmail.com">saralee8694@gmail.com</a></p>
+  <p>© 2026 씨드 아카이브 (Seed Archive Inc.) · <a href="mailto:saralee8694@gmail.com">saralee8694@gmail.com</a></p>
 </footer>
 
 <script>
 // ── MOBILE MENU ──
 function toggleMenu() {
-  const btn = document.getElementById('hamburger');
-  const menu = document.getElementById('mobileMenu');
-  btn.classList.toggle('open');
-  menu.classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
 }
-
-// ── MODE & NAVIGATION ──
-function setMode(mode) {
-  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('on'));
-  event.target.classList.add('on');
-  goTo(mode === 'worker' ? 'w-home' : 'e-dash');
-}
-function goTo(id) {
-  document.querySelectorAll('.app-screen').forEach(s => s.classList.remove('active'));
-  const el = document.getElementById(id);
-  if (el) el.classList.add('active');
-}
-document.querySelectorAll('.fc').forEach(fc => {
-  fc.addEventListener('click', function() {
-    document.querySelectorAll('.fc').forEach(x => x.classList.remove('on'));
-    this.classList.add('on');
-  });
-});
-document.querySelectorAll('.sel-tag').forEach(tag => {
-  tag.addEventListener('click', function() {
-    document.querySelectorAll('.sel-tag').forEach(x => x.classList.remove('on'));
-    this.classList.add('on');
-  });
-});
 
 // ── SCROLL ANIMATIONS ──
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-  observer.observe(el);
-});
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el));
 
 // ── NAV SCROLL ──
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
 });
-
-// ── COUNTER ANIMATION ──
-function animateCounter(el) {
-  const target = parseInt(el.dataset.count);
-  const suffix = el.dataset.suffix || '';
-  let current = 0;
-  const duration = 1500;
-  const step = target / (duration / 16);
-  const timer = setInterval(() => {
-    current = Math.min(current + step, target);
-    el.textContent = Math.floor(current) + suffix;
-    if (current >= target) clearInterval(timer);
-  }, 16);
-}
-
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && entry.target.dataset.count) {
-      animateCounter(entry.target);
-      counterObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
 // ── HERO ELEMENTS: trigger immediately ──
 document.querySelectorAll('.hero .reveal, .hero .reveal-right').forEach(el => {
