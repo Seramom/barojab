@@ -364,7 +364,7 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
           <div class="type-card" id="type-employer" onclick="selectType('employer')">
             <div class="tc-icon">🏢</div>
             <div class="tc-title">사업주</div>
-            <div class="tc-desc">사람을 구해요.<br/>긴급 인력 빠르게 구하기</div>
+            <div class="tc-desc">사람을 구해요.<br/>경험과 조건으로 워커 비교하기</div>
           </div>
         </div>
       </div>
@@ -376,7 +376,7 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
     <!-- ── STEP 1: 휴대폰 인증 ── -->
     <div class="step" id="step-1">
       <div class="step-inner">
-        <div style="background:rgba(122,59,255,.08);border:1px solid rgba(122,59,255,.2);border-radius:10px;padding:10px 14px;font-size:.75rem;color:var(--p);margin-bottom:16px;">🛠️ 데모 모드 — 인증 없이 다음으로 넘어갈 수 있어요</div>
+        <div style="background:rgba(122,59,255,.08);border:1px solid rgba(122,59,255,.2);border-radius:10px;padding:10px 14px;font-size:.75rem;color:var(--p);margin-bottom:16px;">휴대폰 본인인증 기능은 준비 중이에요. 지금은 입력한 번호만 저장돼요.</div>
         <div class="step-icon">📱</div>
         <div class="step-title">휴대폰 번호를<br/>인증해주세요</div>
         <div class="step-desc">본인 확인을 위해 휴대폰 번호가 필요해요.</div>
@@ -421,7 +421,7 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
       <div class="step-inner">
         <div class="step-icon">👤</div>
         <div class="step-title">기본 정보를<br/>입력해주세요</div>
-        <div class="step-desc">사업주에게 표시될 정보예요.</div>
+        <div class="step-desc">사장님께 보일 이름이에요.</div>
 
         <div style="text-align:center;">
           <div class="photo-upload" onclick="document.getElementById('photo-input').click()">
@@ -432,24 +432,8 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
         </div>
 
         <div class="form-group">
-          <label class="form-label">이름<span class="req">*</span></label>
+          <label class="form-label">이름 또는 표시명<span class="req">*</span></label>
           <input type="text" class="form-input" placeholder="실명 입력"/>
-        </div>
-        <div class="form-group">
-          <label class="form-label">생년월일<span class="req">*</span></label>
-          <div class="date-row">
-            <select class="form-select"><option value="">년도</option></select>
-            <select class="form-select"><option value="">월</option></select>
-            <select class="form-select"><option value="">일</option></select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">성별</label>
-          <div style="display:flex;gap:8px;">
-            <div class="tag-chip" onclick="toggleSingle(this,'.gender-chip')" style="flex:1;text-align:center;" data-gender="male">남성</div>
-            <div class="tag-chip" onclick="toggleSingle(this,'.gender-chip')" style="flex:1;text-align:center;" data-gender="female">여성</div>
-            <div class="tag-chip" onclick="toggleSingle(this,'.gender-chip')" style="flex:1;text-align:center;" data-gender="none">선택 안함</div>
-          </div>
         </div>
       </div>
       <div class="btn-wrap">
@@ -463,18 +447,18 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
       <div class="step-inner">
         <div class="step-icon">🏢</div>
         <div class="step-title">사업자 인증을<br/>해주세요</div>
-        <div class="step-desc">안전한 거래를 위해 사업자 정보가 필요해요.</div>
+        <div class="step-desc">입력한 사업자 정보는 관리자 확인 후 승인돼요.</div>
         <div class="form-group">
           <label class="form-label">사업자등록번호<span class="req">*</span></label>
           <div class="form-input-group">
             <input type="text" class="form-input" placeholder="000-00-00000" maxlength="12" oninput="formatBizNum(this)"/>
             <button class="send-btn" onclick="verifyBiz()">조회</button>
           </div>
-          <div class="form-hint">국세청 API로 실시간 확인해요</div>
+          <div class="form-hint">자동 조회 기능은 준비 중이에요</div>
         </div>
         <div class="form-group" id="biz-result" style="display:none">
           <div class="addr-result show" style="background:rgba(34,197,139,.08);border-color:rgba(34,197,139,.3);">
-            ✅ 인증 완료 — <strong id="biz-name">홍길동 개인사업자</strong>
+            <strong id="biz-name">입력 완료</strong>
           </div>
         </div>
         <div class="form-group">
@@ -599,15 +583,6 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
             <div class="time-chip" onclick="toggleTime(this)"><div class="tc-t">협의 가능</div><div class="tc-s">조율 원해요</div></div>
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">희망 시급</label>
-          <div class="tag-wrap">
-            <div class="tag-chip" onclick="toggleSingle(this,'.wage-chip')">최저시급</div>
-            <div class="tag-chip" onclick="toggleSingle(this,'.wage-chip')">13,000원~</div>
-            <div class="tag-chip" onclick="toggleSingle(this,'.wage-chip')">15,000원~</div>
-            <div class="tag-chip" onclick="toggleSingle(this,'.wage-chip')">협의 가능</div>
-          </div>
-        </div>
       </div>
       <div class="btn-wrap">
         <button class="btn-next" onclick="nextStep()">다음으로</button>
@@ -656,21 +631,21 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
       <div class="step-inner">
         <div class="step-icon">📋</div>
         <div class="step-title">경력을 확인해요</div>
-        <div class="step-desc">경력이 있으면 매칭 확률이 높아져요. 건너뛸 수 있어요.</div>
+        <div class="step-desc">본인이 작성한 경력과 자료로 확인된 경력은 구분해 표시돼요. 건너뛸 수 있어요.</div>
         <div class="career-opts">
           <div class="career-opt" onclick="selectCareer(this,'insurance')">
             <div class="co-icon">🏛️</div>
-            <div class="co-text"><div class="co-title">고용보험 이력 연동</div><div class="co-sub">자동으로 근무 경력을 가져와요</div></div>
+            <div class="co-text"><div class="co-title">고용보험 이력 연동</div><div class="co-sub">준비 중이에요</div></div>
             <div class="co-arrow">›</div>
           </div>
           <div class="career-opt" onclick="selectCareer(this,'resume')">
             <div class="co-icon">📄</div>
-            <div class="co-text"><div class="co-title">이력서 업로드</div><div class="co-sub">PDF, Word, JPG 지원</div></div>
+            <div class="co-text"><div class="co-title">경력 자료 제출</div><div class="co-sub">관리자 확인 후 '경력 자료 확인'으로 표시돼요</div></div>
             <div class="co-arrow">›</div>
           </div>
           <div class="career-opt" onclick="selectCareer(this,'manual')">
             <div class="co-icon">✏️</div>
-            <div class="co-text"><div class="co-title">직접 입력</div><div class="co-sub">경력 사항을 직접 작성해요</div></div>
+            <div class="co-text"><div class="co-title">직접 입력</div><div class="co-sub">'본인 작성 경력'으로 표시돼요</div></div>
             <div class="co-arrow">›</div>
           </div>
         </div>
@@ -703,33 +678,12 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
       </div>
     </div>
 
-    <!-- ── STEP 6 (구직자 & 사업주): 정산계좌·약관 ── -->
+    <!-- ── STEP 6 (구직자 & 사업주): 약관 ── -->
     <div class="step" id="step-6-worker">
       <div class="step-inner">
-        <div class="step-icon">💳</div>
-        <div class="step-title">정산 계좌와<br/>약관에 동의해주세요</div>
-        <div class="step-desc">급여를 받을 계좌를 등록해요.</div>
-        <div class="form-group">
-          <label class="form-label">은행 선택<span class="req">*</span></label>
-          <select class="form-select">
-            <option value="">은행을 선택해주세요</option>
-            <option>카카오뱅크</option><option>토스뱅크</option>
-            <option>KB국민은행</option><option>신한은행</option>
-            <option>우리은행</option><option>하나은행</option>
-            <option>NH농협은행</option><option>IBK기업은행</option>
-            <option>케이뱅크</option><option>기타</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">계좌번호<span class="req">*</span></label>
-          <input type="text" class="form-input" placeholder="- 없이 숫자만 입력"/>
-        </div>
-        <div class="form-group">
-          <label class="form-label">예금주</label>
-          <input type="text" class="form-input" placeholder="예금주명"/>
-        </div>
-
-        <div style="height:16px;"></div>
+        <div class="step-icon">📝</div>
+        <div class="step-title">약관에<br/>동의해주세요</div>
+        <div class="step-desc">OJOb는 급여를 지급하거나 정산하지 않아요. 근로계약과 급여는 사장님과 직접 진행해요.</div>
         <div class="terms-list">
           <div class="term-item term-all" onclick="toggleAll(this)">
             <div class="term-check" id="check-all"></div>
@@ -743,11 +697,6 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
           <div class="term-item" onclick="toggleTerm(this,'t2')">
             <div class="term-check" id="t2"></div>
             <div class="term-text">[필수] 개인정보 처리방침</div>
-            <a href="#" class="term-link" onclick="return false;">보기</a>
-          </div>
-          <div class="term-item" onclick="toggleTerm(this,'t3')">
-            <div class="term-check" id="t3"></div>
-            <div class="term-text">[필수] 전자금융거래 이용약관</div>
             <a href="#" class="term-link" onclick="return false;">보기</a>
           </div>
           <div class="term-item" onclick="toggleTerm(this,'t4')">
@@ -765,24 +714,9 @@ main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:4
 
     <div class="step" id="step-6-employer">
       <div class="step-inner">
-        <div class="step-icon">💳</div>
-        <div class="step-title">정산 계좌와<br/>약관에 동의해주세요</div>
-        <div class="step-desc">급여 지급에 사용할 계좌를 등록해요.</div>
-        <div class="form-group">
-          <label class="form-label">은행 선택<span class="req">*</span></label>
-          <select class="form-select">
-            <option value="">은행을 선택해주세요</option>
-            <option>카카오뱅크</option><option>토스뱅크</option>
-            <option>KB국민은행</option><option>신한은행</option>
-            <option>우리은행</option><option>하나은행</option>
-            <option>NH농협은행</option><option>기타</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">계좌번호<span class="req">*</span></label>
-          <input type="text" class="form-input" placeholder="- 없이 숫자만 입력"/>
-        </div>
-        <div style="height:16px;"></div>
+        <div class="step-icon">📝</div>
+        <div class="step-title">약관에<br/>동의해주세요</div>
+        <div class="step-desc">OJOb는 급여를 지급하거나 정산하지 않아요. 채용 조건과 고용은 워커와 직접 진행해요.</div>
         <div class="terms-list">
           <div class="term-item term-all" onclick="toggleAll(this)">
             <div class="term-check" id="check-all-e"></div>
@@ -842,8 +776,8 @@ const workerSteps = [0, 1, '2-worker', '3-worker', '4-worker', '5-worker', '6-wo
 const employerSteps = [0, 1, '2-employer', '3-employer', '4-employer', '5-employer', '6-employer', 7];
 
 const stepLabels = {
-  worker: ['유형 선택','휴대폰 인증','기본 정보','지역·직종','근무 시간대','경력 확인','정산·약관','완료'],
-  employer: ['유형 선택','휴대폰 인증','사업자 인증','매장 정보','매장 주소','매장 사진','정산·약관','완료']
+  worker: ['유형 선택','휴대폰 인증','기본 정보','지역·직종','근무 시간대','경력 등록','약관 동의','완료'],
+  employer: ['유형 선택','휴대폰 인증','사업자 인증','매장 정보','매장 주소','매장 사진','약관 동의','완료']
 };
 
 function getSteps() { return userType === 'employer' ? employerSteps : workerSteps; }
@@ -898,11 +832,6 @@ function collectStepData(step) {
     data.authMethod = document.querySelector('.auth-opt.selected .ao-title')?.textContent || '';
   } else if (step === 2 && isWorker) {
     data.name = document.querySelector('#step-2-worker input[placeholder="실명 입력"]')?.value || '';
-    const selects = document.querySelectorAll('#step-2-worker select');
-    data.birthYear = selects[0]?.value || '';
-    data.birthMonth = selects[1]?.value || '';
-    data.birthDay = selects[2]?.value || '';
-    data.gender = document.querySelector('#step-2-worker .tag-chip.on')?.textContent?.trim() || '';
   } else if (step === 2 && !isWorker) {
     data.bizNumber = document.querySelector('#step-2-employer input[placeholder="000-00-00000"]')?.value || '';
     data.managerName = document.querySelector('#step-2-employer input[placeholder="이름 입력"]')?.value || '';
@@ -917,17 +846,13 @@ function collectStepData(step) {
   } else if (step === 4 && isWorker) {
     data.availableDays = [...document.querySelectorAll('#step-4-worker .tag-wrap .tag-chip.on')].map(t => t.textContent.trim());
     data.availableTimes = [...document.querySelectorAll('.time-chip.on')].map(t => t.querySelector('.tc-t')?.textContent.trim());
-    data.desiredWage = document.querySelector('#step-4-worker .tag-chip.on')?.textContent?.trim() || '';
   } else if (step === 4 && !isWorker) {
     data.address = document.getElementById('addr-text')?.textContent || '';
     data.addressDetail = document.querySelector('#step-4-employer input[placeholder="예: 2층, B동 101호"]')?.value || '';
   } else if (step === 5 && isWorker) {
     data.careerMethod = document.querySelector('.career-opt.selected .co-title')?.textContent?.trim() || '';
   } else if (step === 6) {
-    const sid = isWorker ? 'step-6-worker' : 'step-6-employer';
-    data.bankName = document.querySelector('#' + sid + ' select')?.value || '';
-    data.accountNumber = document.querySelector('#' + sid + ' input[placeholder="- 없이 숫자만 입력"]')?.value || '';
-    if (isWorker) data.accountHolder = document.querySelector('#' + sid + ' input[placeholder="예금주명"]')?.value || '';
+    data.marketingConsent = !!document.querySelector('#' + (isWorker ? 't4' : 'e4') + '.checked');
     data.status = '가입완료';
   }
 
@@ -990,7 +915,7 @@ function startTimer() {
 
 function verifyCode() {
   phoneVerified = true;
-  document.getElementById('code-timer').textContent = '✅ 인증 완료! (데모 모드)';
+  document.getElementById('code-timer').textContent = '번호가 입력됐어요 (본인인증 준비 중)';
   document.getElementById('code-timer').style.color = 'var(--g)';
   clearInterval(timerInterval);
 }
@@ -1042,7 +967,7 @@ function formatBizNum(input) {
 }
 function verifyBiz() {
   document.getElementById('biz-result').style.display = 'block';
-  document.getElementById('biz-name').textContent = '㈜ 씨드 아카이브 (정상 사업자)';
+  document.getElementById('biz-name').textContent = '입력 완료 · 관리자 확인 예정';
 }
 
 // ── CAREER ──
@@ -1067,7 +992,7 @@ function previewPhoto(input) {
 }
 
 // ── TERMS ──
-const requiredTerms = ['t1','t2','t3','e1','e2','e3'];
+const requiredTerms = ['t1','t2','e1','e2','e3'];
 function toggleTerm(el, id) {
   const check = document.getElementById(id);
   const isChecked = check.classList.contains('checked');
@@ -1092,13 +1017,6 @@ function toggleAll(el) {
 function collectWorkerData() {
   // 이름
   const nameInput = document.querySelector('#step-2-worker input[placeholder="실명 입력"]');
-  // 생년월일
-  const selects = document.querySelectorAll('#step-2-worker select');
-  const year = selects[0]?.value || '';
-  const month = selects[1]?.value || '';
-  const day = selects[2]?.value || '';
-  // 성별
-  const genderEl = document.querySelector('#step-2-worker .tag-chip.on');
   // 지역
   const regionTags = [...document.querySelectorAll('#region-tags .tag-chip')].map(t => t.textContent.replace('×','').trim());
   // 희망직종
@@ -1107,31 +1025,18 @@ function collectWorkerData() {
   const days = [...document.querySelectorAll('#step-4-worker .tag-wrap .tag-chip.on')].map(t => t.textContent.trim());
   // 시간대
   const times = [...document.querySelectorAll('.time-chip.on')].map(t => t.querySelector('.tc-t')?.textContent.trim());
-  // 희망시급
-  const wageEl = document.querySelector('#step-4-worker .tag-chip.on[onclick*="wage"]') ||
-                 [...document.querySelectorAll('#step-4-worker .tag-wrap')].pop()?.querySelector('.tag-chip.on');
   // 경력
   const careerEl = document.querySelector('.career-opt.selected .co-title');
-  // 은행/계좌
-  const bankSelect = document.querySelector('#step-6-worker select');
-  const accountInput = document.querySelector('#step-6-worker input[placeholder="- 없이 숫자만 입력"]');
-  const holderInput = document.querySelector('#step-6-worker input[placeholder="예금주명"]');
 
   return {
     type: 'worker',
     phone: document.getElementById('phone-input')?.value || '',
     name: nameInput?.value || '',
-    birthYear: year, birthMonth: month, birthDay: day,
-    gender: genderEl?.textContent?.trim() || '',
     regions: regionTags,
     jobTypes: jobTypes,
     availableDays: days,
     availableTimes: times,
-    desiredWage: wageEl?.textContent?.trim() || '',
     careerMethod: careerEl?.textContent?.trim() || '',
-    bankName: bankSelect?.value || '',
-    accountNumber: accountInput?.value || '',
-    accountHolder: holderInput?.value || '',
     source: 'web-signup',
     registeredAt: new Date().toISOString()
   };
@@ -1154,9 +1059,6 @@ function collectEmployerData() {
   const addrText = document.getElementById('addr-text')?.textContent || '';
   const addrDetail = document.querySelector('#step-4-employer input[placeholder="예: 2층, B동 101호"]');
   const addrGuide = document.querySelector('#step-4-employer input[placeholder="예: 강남역 3번 출구에서 도보 5분"]');
-  // 은행/계좌
-  const bankSelect = document.querySelector('#step-6-employer select');
-  const accountInput = document.querySelector('#step-6-employer input[placeholder="- 없이 숫자만 입력"]');
 
   return {
     type: 'employer',
@@ -1170,8 +1072,6 @@ function collectEmployerData() {
     address: addrText,
     addressDetail: addrDetail?.value || '',
     addressGuide: addrGuide?.value || '',
-    bankName: bankSelect?.value || '',
-    accountNumber: accountInput?.value || '',
     source: 'web-signup',
     registeredAt: new Date().toISOString()
   };
@@ -1190,19 +1090,17 @@ async function setupComplete() {
   }
   document.getElementById('complete-title').textContent = isWorker ? '가입 완료! 🎉' : '매장 등록 완료! 🎉';
   document.getElementById('complete-desc').textContent = isWorker
-    ? '이제 내 주변 알바를 찾아볼 수 있어요.\n일한 만큼, 경력이 되도록.'
-    : '이제 긴급 공고를 올려볼 수 있어요.\n평균 12분 안에 매칭됩니다.';
-  document.getElementById('complete-btn').textContent = isWorker ? '🔍 알바 찾으러 가기' : '🚨 첫 공고 올리기';
+    ? '경력 확인과 일자리 매칭 기능은 준비 중이에요.\n출시되면 가장 먼저 알려드릴게요.'
+    : '공고 등록과 워커 매칭 기능은 준비 중이에요.\n출시되면 가장 먼저 알려드릴게요.';
+  document.getElementById('complete-btn').textContent = '홈으로';
 
   const card = document.getElementById('complete-card');
   card.innerHTML = isWorker ? `
     <div class="cc-row"><span class="cc-k">역할</span><span class="cc-v">👤 구직자 (워커)</span></div>
-    <div class="cc-row"><span class="cc-k">포트폴리오</span><span class="cc-v">ojob.kr/p/내핸들</span></div>
-    <div class="cc-row"><span class="cc-k">첫 알바 매칭</span><span class="cc-v">지금 바로 가능 ✅</span></div>
+        <div class="cc-row"><span class="cc-k">경력 확인</span><span class="cc-v">준비 중</span></div>
   ` : `
     <div class="cc-row"><span class="cc-k">역할</span><span class="cc-v">🏢 사업주</span></div>
-    <div class="cc-row"><span class="cc-k">공고 등록</span><span class="cc-v">지금 바로 가능 ✅</span></div>
-    <div class="cc-row"><span class="cc-k">평균 매칭 시간</span><span class="cc-v">12분 이내 ⚡</span></div>
+    <div class="cc-row"><span class="cc-k">공고 등록</span><span class="cc-v">준비 중</span></div>
   `;
 }
 
@@ -1225,7 +1123,7 @@ showStep(0);
 <!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, updateDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCvoY7a5higrhCpDussWMHBqIbXvbHBwuQ",
