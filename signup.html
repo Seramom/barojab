@@ -365,7 +365,7 @@ body{word-break:keep-all;}
           <div class="type-card" id="type-employer" onclick="selectType('employer')">
             <div class="tc-icon">🏢</div>
             <div class="tc-title">사업주</div>
-            <div class="tc-desc">사람을 구해요.<br/>경험과 조건으로 워커 비교하기</div>
+            <div class="tc-desc">사람을 구해요.<br/>경험과 조건으로 알바생 비교하기</div>
           </div>
         </div>
       </div>
@@ -523,7 +523,7 @@ body{word-break:keep-all;}
       <div class="step-inner">
         <div class="step-icon">🏪</div>
         <div class="step-title">매장 정보를<br/>알려주세요</div>
-        <div class="step-desc">워커에게 표시될 매장 정보예요.</div>
+        <div class="step-desc">알바에게 표시될 매장 정보예요.</div>
         <div class="form-group">
           <label class="form-label">매장명<span class="req">*</span></label>
           <input type="text" class="form-input" placeholder="예: 강남 이탈리안 레스토랑"/>
@@ -596,7 +596,7 @@ body{word-break:keep-all;}
       <div class="step-inner">
         <div class="step-icon">🗺️</div>
         <div class="step-title">매장 주소를<br/>알려주세요</div>
-        <div class="step-desc">워커가 찾아올 수 있도록 정확한 주소가 필요해요.</div>
+        <div class="step-desc">알바가 찾아올 수 있도록 정확한 주소가 필요해요.</div>
         <div class="map-tabs">
           <button class="map-tab on" onclick="switchMap(this,'kakao')">카카오맵</button>
           <button class="map-tab" onclick="switchMap(this,'naver')">네이버지도</button>
@@ -664,7 +664,7 @@ body{word-break:keep-all;}
       <div class="step-inner">
         <div class="step-icon">📸</div>
         <div class="step-title">매장 사진을<br/>올려주세요</div>
-        <div class="step-desc">사진이 있으면 워커의 신뢰도가 올라가요. 건너뛸 수 있어요.</div>
+        <div class="step-desc">사진이 있으면 알바의 신뢰도가 올라가요. 건너뛸 수 있어요.</div>
         <div class="upload-area" onclick="document.getElementById('store-photo').click()">
           <div class="ua-icon">🏪</div>
           <div class="ua-text">매장 외부/내부 사진 업로드</div>
@@ -717,7 +717,7 @@ body{word-break:keep-all;}
       <div class="step-inner">
         <div class="step-icon">📝</div>
         <div class="step-title">약관에<br/>동의해주세요</div>
-        <div class="step-desc">OJOb는 급여를 지급하거나 정산하지 않아요. 채용 조건과 고용은 워커와 직접 진행해요.</div>
+        <div class="step-desc">OJOb는 급여를 지급하거나 정산하지 않아요. 채용 조건과 고용은 알바와 직접 진행해요.</div>
         <div class="terms-list">
           <div class="term-item term-all" onclick="toggleAll(this)">
             <div class="term-check" id="check-all-e"></div>
@@ -1092,12 +1092,12 @@ async function setupComplete() {
   document.getElementById('complete-title').textContent = isWorker ? '가입 완료! 🎉' : '매장 등록 완료! 🎉';
   document.getElementById('complete-desc').textContent = isWorker
     ? '경력 확인과 일자리 매칭 기능은 준비 중이에요.\n출시되면 가장 먼저 알려드릴게요.'
-    : '공고 등록과 워커 매칭 기능은 준비 중이에요.\n출시되면 가장 먼저 알려드릴게요.';
+    : '공고 등록과 알바 매칭 기능은 준비 중이에요.\n출시되면 가장 먼저 알려드릴게요.';
   document.getElementById('complete-btn').textContent = '홈으로';
 
   const card = document.getElementById('complete-card');
   card.innerHTML = isWorker ? `
-    <div class="cc-row"><span class="cc-k">역할</span><span class="cc-v">👤 구직자 (워커)</span></div>
+    <div class="cc-row"><span class="cc-k">역할</span><span class="cc-v">👤 구직자 (알바생)</span></div>
         <div class="cc-row"><span class="cc-k">경력 확인</span><span class="cc-v">준비 중</span></div>
   ` : `
     <div class="cc-row"><span class="cc-k">역할</span><span class="cc-v">🏢 사업주</span></div>
